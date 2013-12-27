@@ -2,356 +2,349 @@
 //  DartVM.cpp
 //  07_dart_bindings
 //
-//  Created by Marcus Wendt on 26/12/2013.
+//  Created by Marcus Wendt on 27/12/2013.
 //
 //
 
 #include "DartVM.h"
 
-#include <iostream>
-#include <sstream>
+#include <vector>
+#include "dart_api.h"
+
+#include "Isolate.h"
+#include "Library.h"
+#include "utilities.h"
 
 
 namespace fieldkit { namespace dart {
-
-// -- Utilities ------------------------------------------------------------------------
-#pragma mark Utilities
-
-#define FKDART_CORE_LIBRARY "fkdart"
+    
+    #define FKDART_CORE_LIBRARY "fkdart"
     
     
-// Logger
-#define LOG(TYPE, MSG) \
-    { \
-        std::stringstream ss; \
-        ss << TYPE << ": " << MSG; \
-        ss << "\n"; \
-        std::cout << ss.str(); \
+    DartVM::DartVM()
+    {
+        std::string basePath = "../Resources"; // OS dependent
+        
+        libraryScript_ = basePath + "/fkdart.dart";
+        
+        std::string snapshotFile = basePath + "/snapshot.bin";
+        LoadSnapshot(snapshotFile);
     }
 
-#define LOG_I(MSG) LOG("INFO", MSG)
-#define LOG_E(MSG) LOG("ERROR", MSG)
-
-
-// Reads a file into a stl string.
-static std::string ReadFileContents(std::string const& path)
-{
-    FILE* file = fopen(path.c_str(), "rb");
-    if (file == NULL) return "";
     
-    fseek(file, 0, SEEK_END);
-    int size = ftell(file);
-    rewind(file);
-    
-    char* chars = new char[size + 1];
-    chars[size] = '\0';
-    for (int i = 0; i < size;) {
-        int read = fread(&chars[i], 1, size - i, file);
-        i += read;
-    }
-    fclose(file);
-    
-    std::string contents = std::string(chars, size);
-    delete chars;
-    
-    return contents;
-}
-
-
-// -- Dart Utilities ------------------------------------------------------------------------------
-#pragma mark Dart Utilities
-
-#define CHECK(result)                               \
-{													\
-    if(Dart_IsError(result)) {                      \
-       LOG_E(Dart_GetError(result));                \
-       assert(0);                                   \
-    }												\
-}
-
-#define CHECK_RETURN(result)                        \
-{													\
-    if(Dart_IsError(result)) {                      \
-       LOG_E(Dart_GetError(result));                \
-       return;										\
-    }												\
-}
-
-    
-static Dart_Handle NewString(const char* str)
-{
-    return Dart_NewStringFromCString(str);
-}
-
-//static std::string GetString(Dart_Handle handle)
-//{
-//    const char *result;
-//    CHECK(Dart_StringToCString(handle, &result));
-//    return std::string(result);
-//}
-
-
-#pragma mark Constructor
-    
-DartVM::DartVM()
-{
-    std::string basePath = "../Resources"; // OS dependent
-    coreLibraryScript_ = basePath + "/fkdart.dart";
-}
-    
-    
-// -- VM Initialisation ------------------------------------------------------------------------
-#pragma mark Initialisation
-
-static Dart_NativeFunction ResolveName(Dart_Handle handle, int argc, bool* auto_setup_scope)
-{
-    assert(Dart_IsString(handle));
-    
-    DartScope enterScope;
-    std::string name = fieldkit::dart::GetString(handle);
-    
-    DartVM *dartVm = static_cast<DartVM *>( Dart_CurrentIsolateData() );
-    auto& functionMap = dartVm->nativeFunctions_;
-    auto functionIt = functionMap.find( name );
-    if( functionIt != functionMap.end() )
-        return functionIt->second;
-    
-    return NULL;
-}
-
-    
-static Dart_Handle LibraryTagHandler(Dart_LibraryTag tag, Dart_Handle library, Dart_Handle urlHandle)
-{
-    LOG_I("LibraryTagHandler");
-    
-    if(tag == Dart_kCanonicalizeUrl )
-        return urlHandle;
-    
-    std::string url = GetString(urlHandle);
-    if(url == FKDART_CORE_LIBRARY) {
-        DartVM *dartVm = static_cast<DartVM *>(Dart_CurrentIsolateData());
+    #pragma mark ---- Isolate Creation ----
+    Dart_Handle LibraryTagHandler(Dart_LibraryTag tag,
+                                  Dart_Handle library,
+                                  Dart_Handle url) {
+//        const char* url_str = NULL;
+//        Dart_Handle result = Dart_StringToCString(url, &url_str);
+//        if (Dart_IsError(result))
+//            return result;
+//        assert(false);  // TODO: implement.
         
-        std::string script = ReadFileContents(dartVm->getCoreLibraryScript());
-        Dart_Handle source = Dart_NewStringFromCString( script.c_str() );
-        CHECK(source);
+        if(tag == Dart_kCanonicalizeUrl)
+            return url;
         
-        Dart_Handle library = Dart_LoadLibrary( urlHandle, source );
-        CHECK(library);
-        
-        CHECK(Dart_SetNativeResolver(library, ResolveName));
-        
-        return library;
+        std::string urlStr = GetString(url);
+        if(urlStr == FKDART_CORE_LIBRARY) {
+            DartVM *dartVm = static_cast<DartVM *>(Dart_CurrentIsolateData());
+            
+            std::string script = ReadFileContents(dartVm->getLibraryScript());
+            Dart_Handle source = Dart_NewStringFromCString( script.c_str() );
+            CHECK(source);
+            
+            Dart_Handle library = Dart_LoadLibrary(url, source);
+            CHECK(library);
+            
+//            CHECK(Dart_SetNativeResolver(library, ResolveName));
+            
+            return library;
+        }
+
     }
     
-    assert(false && "unreachable");
-    return NULL;
-}
-
-
-Dart_Isolate CreateIsolate(const char* script_uri, const char* main, void* data, char** error)
-{
-    DartVM *dartVm = reinterpret_cast<DartVM *>(data);
-    const uint8_t* snapshotData = (const uint8_t*) ReadFileContents(dartVm->snapshotFile_).c_str();
+    Dart_Handle ResolveScript(const char* script, Dart_Handle coreLibrary) {
+        char* cwd = getcwd(NULL, 0);
+        Dart_Handle args[3] = {
+            NewString(cwd),
+            NewString(script),
+            Dart_True()  // TODO: should this be true or false?
+        };
+        Dart_Handle ret = Dart_Invoke(coreLibrary, NewString("_resolveScriptUri"), 3, args);
+        free(cwd);
+        return ret;
+    }
     
-	LOG_I("Creating isolate " << script_uri << ", " << main);
-	Dart_Isolate isolate = Dart_CreateIsolate(script_uri, main, snapshotData, data, error);
-	if(!isolate) {
-		LOG_E("Couldn't create isolate: " << *error);
-		return NULL;
-	}
+    Dart_Handle FilePathFromUri(Dart_Handle script, Dart_Handle coreLibrary) {
+        Dart_Handle args[2] = {
+            script,
+            Dart_True()  // TODO: should this be true or false?
+        };
+        return Dart_Invoke(coreLibrary, NewString("_filePathFromUri"), 2, args);
+    }
     
-	// Set up the library tag handler for this isolate.
-	DartScope scope;
-
-    LOG_I("set library tag handler");
-	Dart_Handle result = Dart_SetLibraryTagHandler(LibraryTagHandler);
-    CHECK(result);
-    
-	return isolate;
-}
-
-    
-Dart_Isolate IsolateCreateCb(const char* script_uri,
-                             const char* main,
-                             void* callback_data,
-                             char** error)
-{
-    Dart_Isolate isolate = CreateIsolate(script_uri, main, callback_data, error);
-//    if (isolate == NULL) {
-//        std::cerr << "Failed to create Isolate: " << script_uri << "|" << main
-//        << ": " << error << std::endl;
-//    }
-//    return isolate != NULL;
-    return isolate;
-}
-    
-bool InterruptIsolateCb()
-{
-    LOG_I("InterruptIsolate");
-	return true;
-}
-
-void UnhandledExceptionCb(Dart_Handle error)
-{
-    LOG_E("UnhandledException " << Dart_GetError(error));
-}
-
-void ShutdownIsolateCb(void *callbackData)
-{
-    LOG_I("ShutdownIsolate");
-}
-
-// file callbacks have been copied verbatum from included sample... plus verbose logging. don't event know yet if we need them
-void* OpenFileCb(const char* name, bool write)
-{
-//	LOG_V( "name: " << name << ", write mode: " << boolalpha << write << dec );
-	return fopen(name, write ? "w" : "r");
-}
-
-
-void ReadFileCb(const uint8_t** data, intptr_t* fileLength, void* stream )
-{
-	if (!stream) {
-		*data = 0;
-		*fileLength = 0;
-	} else {
-		FILE* file = reinterpret_cast<FILE*>(stream);
+    Dart_Handle ReadSource(Dart_Handle script, Dart_Handle coreLibrary) {
+        Dart_Handle script_path = FilePathFromUri(script, coreLibrary);
+        if (Dart_IsError(script_path))
+            return script_path;
         
-		// Get the file size.
-		fseek(file, 0, SEEK_END);
-		*fileLength = ftell(file);
-		rewind(file);
+        const char* script_path_str;
+        Dart_StringToCString(script_path, &script_path_str);
         
-		// Allocate data buffer.
-		*data = new uint8_t[*fileLength];
-		*fileLength = fread(const_cast<uint8_t*>(*data), 1, *fileLength, file);
-	}
-}
-
-
-static void WriteFileCb(const void* data, intptr_t length, void* file)
-{
-	fwrite(data, 1, length, reinterpret_cast<FILE*>(file));
-}
-
-
-static void CloseFileCb(void* file)
-{
-	fclose(reinterpret_cast<FILE*>(file));
-}
-
-
-static bool EntropySourceCb(uint8_t* buffer, intptr_t length)
-{
-    return true;
-}
-
-
-void DartVM::init(const std::string snapshotFile, const bool checkedMode)
-{
-    snapshotFile_ = snapshotFile;
+        FILE* file = fopen(script_path_str, "r");
+        if (file == NULL)
+            LOG_W("Unable to read file " << script_path_str);
+//            return Dart_NewApiError("Unable to read file '%s'", script_path_str);
+        
+        fseek(file, 0, SEEK_END);
+        long length = ftell(file);
+        fseek(file, 0, SEEK_SET);
+        
+        char* buffer = new char[length + 1];
+        size_t read = fread(buffer, 1, length, file);
+        fclose(file);
+        buffer[read] = '\0';
+        
+        Dart_Handle source = NewString(buffer);
+        
+        delete[] buffer;
+        
+        return source;
+    }
     
-    // setting VM startup options
-    if(checkedMode)
-        vmFlags_.push_back("--enable-checked-mode");
-    
-	const char **vmFlags = (const char **)malloc(vmFlags_.size() * sizeof( const char * ));
-	for(size_t i = 0; i < vmFlags_.size(); i++)
-		vmFlags[i] = vmFlags_[i].c_str();
-    
-	bool success = Dart_SetVMFlags(vmFlags_.size(), vmFlags);
-	assert(success);
-	free(vmFlags);
-    
-    success = Dart_Initialize(IsolateCreateCb, InterruptIsolateCb,
-                              UnhandledExceptionCb, ShutdownIsolateCb,
-                              OpenFileCb, ReadFileCb,
-                              WriteFileCb, CloseFileCb, EntropySourceCb);
-	assert(success);
-}
-
-
-// -- Script Execution ------------------------------------------------------------------------
-#pragma mark Script Execution
-
-bool DartVM::loadScript(const std::string scriptFile)
-{
-    Dart_Isolate currentIsolate = Dart_CurrentIsolate();
-	if(currentIsolate && currentIsolate == isolate_) {
-		printf("isolate already loaded, shutting down first");
-		Dart_ShutdownIsolate();
-	}
-    
-	char *error;
-    isolate_ = CreateIsolate(scriptFile.c_str(), "main", this, &error);
-	if(!isolate_) {
-        LOG_E( "could not create isolate: " << error );
-		assert(false);
-	}
-
-//    const char* script = scriptFile.c_str();
-//    const char* main = "main";
-//    const uint8_t* snapshotBuffer = (const uint8_t*) ReadFileContents(snapshotFile_).c_str();
-//    
-//    char* error = NULL;
-//    isolate_ = Dart_CreateIsolate(script, main, snapshotBuffer, NULL, &error);
-//    assert(isolate_);
+    // Temporary fix until we get the internal libraries to load
+    Dart_Handle ReadSourceFixed(Dart_Handle script, Dart_Handle coreLibrary) {
+        Dart_Handle scriptPath = script;
+        Dart_Handle source = fieldkit::dart::NewString(ReadFileContents(GetString(scriptPath)).c_str());
+        return source;
+    }
 
     
-	DartScope scope;
+    Dart_Handle LoadScript(const char* script,
+                           bool resolve,
+                           Dart_Handle coreLibrary) {
+//        std::cout << __FUNCTION__ << ": " << script << ", " << resolve << std::endl;
+        Dart_Handle resolved_script;
+        
+        if (resolve) {
+            resolved_script = ResolveScript(script, coreLibrary);
+            if (Dart_IsError(resolved_script))
+                return resolved_script;
+        } else {
+            resolved_script = NewString(script);
+        }
+        
+//        Dart_Handle source = ReadSource(resolved_script, coreLibrary);
+        Dart_Handle source = ReadSourceFixed(resolved_script, coreLibrary);
+        if (Dart_IsError(source))
+            return source;
+        
+        return Dart_LoadScript(resolved_script, source, 0, 0);
+    }
     
-    // load source
-    Dart_Handle url = NewString(scriptFile.c_str());
     
-    const char* sourceStr = ReadFileContents(scriptFile.c_str()).c_str();
-	Dart_Handle source = Dart_NewStringFromCString(sourceStr);
-    
-	CHECK(source);
-	CHECK_RETURN(Dart_LoadScript(url, source, 0, 0));
+    Isolate* CreateIsolate(const std::string scriptFile, const char* main, bool resolve,
+                           void* data, char** error)
+    {
+        
+        DartVM* dartVm = reinterpret_cast<DartVM*>(data);
+        
+        uint8_t* snapshotBuffer = dartVm->getSnapshot();
+        
+        Dart_Isolate isolate = Dart_CreateIsolate(scriptFile.c_str(),
+                                                  main,
+                                                  snapshotBuffer,
+                                                  dartVm,
+                                                  error);
+        assert(isolate);
+        
+//        std::cout << "Created isolate" << std::endl;
+        Dart_EnterScope();
+        
+        Dart_Handle result = Dart_SetLibraryTagHandler(LibraryTagHandler);
+        
+        if (Dart_IsError(result)) {
+            *error = strdup(Dart_GetError(result));
+            Dart_ExitScope();
+            Dart_ShutdownIsolate();
+            return NULL;
+        }
+        
+        // Set up uri library.
+//        Dart_Handle uriLibrary = Isolate::uriLibrary->Load();
+//        if (Dart_IsError(uriLibrary)) {
+//            *error = strdup(Dart_GetError(result));
+//            Dart_ExitScope();
+//            Dart_ShutdownIsolate();
+//            return NULL;
+//        }
 
-    // load libraries
-    Dart_Handle rootLib = Dart_RootLibrary();
-	assert(!Dart_IsNull(rootLib));
+        // Set up core library.
+        Dart_Handle coreLibrary = Isolate::coreLibrary->Load();
+        if (Dart_IsError(coreLibrary)) {
+            *error = strdup(Dart_GetError(result));
+            Dart_ExitScope();
+            Dart_ShutdownIsolate();
+            return NULL;
+        }
 
-    CHECK(Dart_SetNativeResolver(rootLib, ResolveName));
-
-	return true;
-}
-
-
-void DartVM::invoke(const std::string &functionName, int argc, Dart_Handle* args)
-{
-	DartScope scope;
+        // Set up io library.
+//        Dart_Handle ioLibrary = Isolate::ioLibrary->Load();
+//        if (Dart_IsError(ioLibrary)) {
+//            *error = strdup(Dart_GetError(result));
+//            Dart_ExitScope();
+//            Dart_ShutdownIsolate();
+//            return NULL;
+//        }
+        LOG_I("Loaded builtin libraries")
+        
+        LOG_I("About to load " << scriptFile)
+        Dart_Handle library = LoadScript(scriptFile.c_str(), false, coreLibrary);
+        
+        if (Dart_IsError(library)) {
+            *error = strdup(Dart_GetError(library));
+            Dart_ExitScope();
+            Dart_ShutdownIsolate();
+            return NULL;
+        }
+        
+        result = Dart_LibraryImportLibrary(library, coreLibrary, Dart_Null());
+        
+        if (Dart_IsError(library)) {
+            *error = strdup(Dart_GetError(library));
+            Dart_ExitScope();
+            Dart_ShutdownIsolate();
+            return NULL;
+        }
+        
+        return new Isolate(isolate, library);
+    }
     
-	Dart_Handle library = Dart_RootLibrary();
-	assert(!Dart_IsNull(library));
     
-	Dart_Handle nameHandle = Dart_NewStringFromCString(functionName.c_str());
-	Dart_Handle result = Dart_Invoke(library, nameHandle, argc, args);
-	CHECK_RETURN(result);
+    #pragma mark ---- Initialisation ----
+    Dart_Isolate IsolateCreateCb(const char* script_uri,
+                         const char* main,
+                         void* callback_data,
+                         char** error)
+    {
+        Isolate* isolate = CreateIsolate(script_uri, main, true, NULL, error);
+        if (isolate == NULL) {
+            std::cerr << "Failed to create Isolate: " << script_uri << "|" << main
+            << ": " << error << std::endl;
+        }
+        return isolate->getIsolate();
+    }
     
-	// TODO: there was originally a note saying this probably isn't necessary.. try removing
-	// Keep handling messages until the last active receive port is closed.
-	result = Dart_RunLoop();
-	CHECK(result);
+    bool InterruptIsolateCb()
+    {
+        return true;
+    }
     
-	return;
-}
+    void UnhandledExceptionCb(Dart_Handle error)
+    {
+        LOG_E("UnhandledException " << Dart_GetError(error));
+    }
+    
+    void ShutdownIsolateCb(void *callbackData)
+    {
+    }
+    
+    // file callbacks have been copied verbatum from included sample... plus verbose logging. don't event know yet if we need them
+    void* OpenFileCb(const char* name, bool write)
+    {
+        //	LOG_V( "name: " << name << ", write mode: " << boolalpha << write << dec );
+        return fopen(name, write ? "w" : "r");
+    }
+    
+    
+    void ReadFileCb(const uint8_t** data, intptr_t* fileLength, void* stream )
+    {
+        if (!stream) {
+            *data = 0;
+            *fileLength = 0;
+        } else {
+            FILE* file = reinterpret_cast<FILE*>(stream);
+            
+            // Get the file size.
+            fseek(file, 0, SEEK_END);
+            *fileLength = ftell(file);
+            rewind(file);
+            
+            // Allocate data buffer.
+            *data = new uint8_t[*fileLength];
+            *fileLength = fread(const_cast<uint8_t*>(*data), 1, *fileLength, file);
+        }
+    }
+    
+    
+    static void WriteFileCb(const void* data, intptr_t length, void* file)
+    {
+        fwrite(data, 1, length, reinterpret_cast<FILE*>(file));
+    }
+    
+    
+    static void CloseFileCb(void* file)
+    {
+        fclose(reinterpret_cast<FILE*>(file));
+    }
+    
+    
+    static bool EntropySourceCb(uint8_t* buffer, intptr_t length)
+    {
+        return true;
+    }
+    
+    void DartVM::Init(const bool checkedMode)
+    {
+        // setting VM startup options
+        std::vector<std::string> vmFlags;
+        if(checkedMode)
+            vmFlags.push_back("--enable-checked-mode");
+        
+        const char **vmFlagsC = (const char **)malloc(vmFlags.size() * sizeof( const char * ));
+        for(size_t i = 0; i < vmFlags.size(); i++)
+            vmFlagsC[i] = vmFlags[i].c_str();
+        
+        bool success = Dart_SetVMFlags(vmFlags.size(), vmFlagsC);
+        assert(success);
+        free(vmFlagsC);
+        
+        success = Dart_Initialize(IsolateCreateCb, InterruptIsolateCb,
+                                  UnhandledExceptionCb, ShutdownIsolateCb,
+                                  OpenFileCb, ReadFileCb,
+                                  WriteFileCb, CloseFileCb, EntropySourceCb);
+        assert(success);
+        
+        Isolate::InitializeBuiltinLibraries();
+    }
+    
+    
+    #pragma mark ---- Shutdown ----
+    void DartVM::Shutdown()
+    {
+        Isolate::ShutdownBuiltinLibraries();
+    }
+    
+    
+    void DartVM::LoadSnapshot(const std::string file)
+    {
+        LOG_I("Loading Snapshot " << file);
+        // TODO should error if snapshot is empty
+        snapshotBuffer_ = (uint8_t*) ReadFileContents(file).c_str();
+    }
+    
+    
+    #pragma mark ---- LoadScript ----
+    Isolate* DartVM::LoadScript(const std::string scriptFile)
+    {
+        char* error = NULL;
+        Isolate* isolate = CreateIsolate(scriptFile, "main", true, this, &error);
+        if (!isolate)
+            LOG_E("Failed to create Isolate." << std::endl << error);
+        return isolate;
+    }
 
+    #pragma mark ---- Accessors ----
+    std::string DartVM::getVersion() { return Dart_VersionString(); }
 
-void DartVM::add(std::string name, Dart_NativeFunction function)
-{
-    LOG_I("add native function '" << name << "'");
-    nativeFunctions_.insert(std::pair<std::string, Dart_NativeFunction>(name, function));
-}
-    
-
-#pragma mark Accessors
-std::string DartVM::getCoreLibraryScript() { return coreLibraryScript_; }
-    
-std::string DartVM::getVersion() {
-    return Dart_VersionString();
-}
-
-    
-} } // namespace fieldkit::dart
+} }  // namespace fieldkit::dart

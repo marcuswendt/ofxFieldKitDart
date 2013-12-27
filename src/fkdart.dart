@@ -1,3 +1,3 @@
 library fkdart;
 
-void console(String message) native "console";
+void print(String message) native "print";
