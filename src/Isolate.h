@@ -10,8 +10,6 @@
 
 #pragma once
 
-#include <vector>
-
 #include "dart_api.h"
 
 namespace fieldkit { namespace dart {
@@ -25,19 +23,6 @@ namespace fieldkit { namespace dart {
           library_(library) {}
         
         ~Isolate() {}
-        
-        static void InitializeBuiltinLibraries();
-        static void ShutdownBuiltinLibraries();
-        
-        static std::vector<Library*> builtInLibraries;
-
-        // dart core libraries
-        static Library* core_library;
-        static Library* uri_library;
-        static Library* io_library;
-        
-        // fieldkit-dart core library
-        static Library* base_library;
 
         //! calls a function by name with the given arguments
         void Invoke(const char* function, int argc = 0, Dart_Handle* args = NULL);
@@ -47,7 +32,7 @@ namespace fieldkit { namespace dart {
         
     private:
         Dart_Isolate isolate_;
-        Dart_Handle library_; // ?
+        Dart_Handle library_;
     };
     
 } } // namespace fieldkit::dart

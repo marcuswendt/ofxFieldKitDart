@@ -35,9 +35,7 @@ namespace fieldkit { namespace dart {
     std::string ReadFileContents(std::string const& path);
     
     
-    // Dart API Utilities
-    #define FKDART_BASE_LIBRARY "fkbase"
-    
+    // Dart API Utilities    
 #define CHECK(result)                               \
 {													\
     if(Dart_IsError(result)) {                      \

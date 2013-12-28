@@ -10,18 +10,40 @@
 
 #include "Library.h"
 
-#include "utilities.h"
 #include "dart_api.h"
+
+#include "DartVM.h"
+#include "utilities.h"
+
 
 namespace fieldkit { namespace dart {
     
-    Library::Library(const char* name, const char* source,
-                     Dart_NativeEntryResolver native_resolver,
-                     Dart_LibraryInitializer initializer)
-    : name_(name),
-      source_(source),
-      nativeResolver_(native_resolver),
-      initializer_(initializer) {}
+    
+    Dart_NativeFunction LibraryResolver(Dart_Handle name, int argc, bool* auto_setup_scope = false)
+    {
+        const char* native_function_name = 0;
+        Dart_StringToCString(name, &native_function_name);
+     
+        DartVM* dartVM = static_cast<DartVM*>(Dart_CurrentIsolateData());
+        
+        for(Library* library : dartVM->getLibraries())
+        {
+            auto functionMap = library->getFunctions();
+            auto functionIt = functionMap.find(native_function_name);
+            
+            if( functionIt != functionMap.end() )
+                return functionIt->second;
+    
+        }
+        
+        LOG_W(native_function_name << " is unresolved.");
+        return NULL;
+    }
+    
+    
+    Library::Library()
+    : name_(NULL), source_(NULL), initializer_(NULL)
+    {}
     
     Dart_Handle Library::Load()
     {
@@ -36,13 +58,18 @@ namespace fieldkit { namespace dart {
             return library;
         }
         
-        if (nativeResolver_ != NULL)
-            Dart_SetNativeResolver(library, nativeResolver_);
+        Dart_SetNativeResolver(library, LibraryResolver);
         
         if (initializer_ != NULL)
             initializer_(library);
         
         return library;
+    }
+    
+    
+    void Library::add(const char* name, Dart_NativeFunction function)
+    {
+        functions_.insert(std::make_pair(name, function));
     }
     
 } } // namespace fieldkit::dart

@@ -11,11 +11,13 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
 namespace fieldkit { namespace dart {
     
     class Isolate;
-
+    class Library;
+    
     class DartVM {
     public:
         DartVM();
@@ -31,15 +33,19 @@ namespace fieldkit { namespace dart {
         //! load, parse and compile a script, returns a script isolate
         Isolate* LoadScript(const std::string scriptFile);
         
+        void add(Library* library);
         
         // Accessors
         std::string getVersion();
         uint8_t* getSnapshot() { return snapshotBuffer_; }
-        std::string getLibraryScript() { return libraryScript_; }
+        std::vector<Library*> getLibraries() { return libraries_; }
+        
+//        std::string getLibraryScript() { return libraryScript_; }
         
     private:
         uint8_t* snapshotBuffer_;
-        std::string libraryScript_;
+        std::vector<Library*> libraries_;
+//        std::string libraryScript_;
     };
     
 } } // namespace fieldkit::dart

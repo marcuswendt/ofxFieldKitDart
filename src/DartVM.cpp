@@ -17,6 +17,8 @@
 #include "Library.h"
 #include "utilities.h"
 
+#include "CoreLibrary.h"
+
 
 namespace fieldkit { namespace dart {
     
@@ -24,11 +26,12 @@ namespace fieldkit { namespace dart {
     DartVM::DartVM()
     {
         std::string basePath = "../Resources"; // OS dependent
-        
-        libraryScript_ = basePath + "/" + FKDART_BASE_LIBRARY + ".dart";
+//        libraryScript_ = basePath + "/" + FKDART_BASE_LIBRARY + ".dart";
         
         std::string snapshotFile = basePath + "/snapshot.bin";
         LoadSnapshot(snapshotFile);
+        
+        add(new CoreLibrary());
     }
 
     
@@ -45,24 +48,27 @@ namespace fieldkit { namespace dart {
         
         if(tag == Dart_kCanonicalizeUrl)
             return url;
+
+        LOG_W("shouldnt happen!");
         
-        std::string urlStr = GetString(url);
-        if(urlStr == FKDART_BASE_LIBRARY) {
-            DartVM *dartVm = static_cast<DartVM *>(Dart_CurrentIsolateData());
-            
-            std::string script = ReadFileContents(dartVm->getLibraryScript());
-            Dart_Handle source = Dart_NewStringFromCString( script.c_str() );
-            CHECK(source);
-            
-            Dart_Handle library = Dart_LoadLibrary(url, source);
-            CHECK(library);
-            
-//            CHECK(Dart_SetNativeResolver(library, ResolveName));
-            
-            return library;
-        }
+//        std::string urlStr = GetString(url);
+//        if(urlStr == FKDART_BASE_LIBRARY) {
+//            DartVM *dartVm = static_cast<DartVM *>(Dart_CurrentIsolateData());
+//            
+//            std::string script = ReadFileContents(dartVm->getLibraryScript());
+//            Dart_Handle source = Dart_NewStringFromCString( script.c_str() );
+//            CHECK(source);
+//            
+//            Dart_Handle library = Dart_LoadLibrary(url, source);
+//            CHECK(library);
+//            
+////            CHECK(Dart_SetNativeResolver(library, ResolveName));
+//            
+//            return library;
+//        }
 
     }
+
     
     Dart_Handle ResolveScript(const char* script, Dart_Handle core_library) {
         char* cwd = getcwd(NULL, 0);
@@ -107,9 +113,7 @@ namespace fieldkit { namespace dart {
         buffer[read] = '\0';
         
         Dart_Handle source = NewString(buffer);
-        
         delete[] buffer;
-        
         return source;
     }
     
@@ -171,49 +175,26 @@ namespace fieldkit { namespace dart {
             return NULL;
         }
         
-        // Set up uri library.
-//        Dart_Handle uri_library = Isolate::uri_library->Load();
-//        if (Dart_IsError(uri_library)) {
-//            *error = strdup(Dart_GetError(result));
-//            Dart_ExitScope();
-//            Dart_ShutdownIsolate();
-//            return NULL;
-//        }
-
-        // Set up core library.
-        Dart_Handle core_library = Isolate::core_library->Load();
-        if (Dart_IsError(core_library)) {
-            *error = strdup(Dart_GetError(result));
-            Dart_ExitScope();
-            Dart_ShutdownIsolate();
-            return NULL;
-        }
-
-        // Set up io library.
-//        Dart_Handle io_library = Isolate::io_library->Load();
-//        if (Dart_IsError(io_library)) {
-//            *error = strdup(Dart_GetError(result));
-//            Dart_ExitScope();
-//            Dart_ShutdownIsolate();
-//            return NULL;
-//        }
-        
-        // Set up base library.
-        printf("source before %s\n", Isolate::base_library->source_);
-        
-        Dart_Handle base_library = Isolate::base_library->Load();
-        
-        printf("source after %s\n", Isolate::base_library->source_);
-        
-        if (Dart_IsError(base_library)) {
-            *error = strdup(Dart_GetError(base_library));
-            Dart_ExitScope();
-            Dart_ShutdownIsolate();
-            return NULL;
+        // Load libraries
+        Dart_Handle core_library;        
+        for(Library* library : dartVm->getLibraries())
+        {
+            result = library->Load();
+            
+            if (Dart_IsError(result)) {
+                *error = strdup(Dart_GetError(result));
+                Dart_ExitScope();
+                Dart_ShutdownIsolate();
+                return NULL;
+            }
+            
+            if(library->getName() == CORE_LIBRARY_NAME)
+                core_library = result;
         }
         LOG_I("Loaded built-in libraries")
         
-//        LOG_I("About to load " << scriptFile)
+        
+        LOG_I("About to load " << scriptFile)
         Dart_Handle library = LoadScript(scriptFile.c_str(), false, core_library);
         
         if (Dart_IsError(library)) {
@@ -231,9 +212,6 @@ namespace fieldkit { namespace dart {
             Dart_ShutdownIsolate();
             return NULL;
         }
-        
-        // import base as well
-        result = Dart_LibraryImportLibrary(library, base_library, Dart_Null());
         
         if (Dart_IsError(result)) {
             *error = strdup(Dart_GetError(result));
@@ -340,14 +318,16 @@ namespace fieldkit { namespace dart {
                                   WriteFileCb, CloseFileCb, EntropySourceCb);
         assert(success);
         
-        Isolate::InitializeBuiltinLibraries();
+        // initialise libraries
+        for(Library* library : libraries_)
+            library->Init();
     }
     
     
     #pragma mark ---- Shutdown ----
     void DartVM::Shutdown()
     {
-        Isolate::ShutdownBuiltinLibraries();
+//        Isolate::ShutdownBuiltinLibraries();
     }
     
     
@@ -370,6 +350,11 @@ namespace fieldkit { namespace dart {
     }
 
     #pragma mark ---- Accessors ----
+    void DartVM::add(Library* library)
+    {
+        libraries_.push_back(library);
+    }
+    
     std::string DartVM::getVersion() { return Dart_VersionString(); }
 
 } }  // namespace fieldkit::dart
