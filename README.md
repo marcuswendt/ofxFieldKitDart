@@ -37,3 +37,10 @@ https://github.com/field/FieldKit.cpp
 Released under the BSD license. Full details in the included LICENSE.txt file.
 
 Copyright (c) 2013 Marcus Wendt <marcus@field.io>
+
+
+
+## TODO
+
+* built-in libraries as modules in dartvm
+* replace LOG_E with Dart_NewApiError etc.
