@@ -38,6 +38,7 @@ namespace fieldkit { namespace dart {
         
         if (nativeResolver_ != NULL)
             Dart_SetNativeResolver(library, nativeResolver_);
+        
         if (initializer_ != NULL)
             initializer_(library);
         

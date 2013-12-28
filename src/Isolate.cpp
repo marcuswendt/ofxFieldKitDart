@@ -14,11 +14,12 @@
 
 #include "Library.h"
 #include "utilities.h"
+#include "BaseLibrary.h"
 
-#define BUILTIN_FUNCTION_NAME(name) Builtin_##name
-#define DECLARE_BUILTIN_FUNCTION(name) \
-extern void BUILTIN_FUNCTION_NAME(name)(Dart_NativeArguments args)
 
+//#define BUILTIN_FUNCTION_NAME(name) Builtin_##name
+//#define DECLARE_BUILTIN_FUNCTION(name) \
+//    extern void BUILTIN_FUNCTION_NAME(name)(Dart_NativeArguments args)
 //DECLARE_BUILTIN_FUNCTION(Exit);
 //DECLARE_BUILTIN_FUNCTION(Logger_PrintString);
 
@@ -28,58 +29,20 @@ namespace fieldkit { namespace dart {
     // Static
     std::vector<Library*> Isolate::builtInLibraries;
     
-    Library* Isolate::coreLibrary = NULL;
-    Library* Isolate::uriLibrary = NULL;
-    Library* Isolate::ioLibrary = NULL;
+    Library* Isolate::core_library = NULL;
+    Library* Isolate::uri_library = NULL;
+    Library* Isolate::io_library = NULL;
+    Library* Isolate::base_library = NULL;
 
     
-    #pragma mark ---- BuiltIn Libraries ----
-    typedef std::map<std::string, Dart_NativeFunction> NativeFunctionMap;
-    
+    #pragma mark ---- Dart Core Libraries ----
     NativeFunctionMap coreNativeFunctions;
     NativeFunctionMap ioNativeFunctions;
 
-    template<const NativeFunctionMap& function_map>
-    Dart_NativeFunction LibraryResolver(Dart_Handle name, int argc, bool* auto_setup_scope = false)
-    {
-        const char* native_function_name = 0;
-        
-        Dart_StringToCString(name, &native_function_name);
-        
-        NativeFunctionMap::const_iterator func_it =
-        function_map.find(native_function_name);
-        
-        if (func_it != function_map.end())
-            return func_it->second;
-        
-        LOG_W(native_function_name << " is unresolved.");
-        return NULL;
-    }
-
-    void coreExit(Dart_NativeArguments args)
-    {
-        exit(0);
-    }
-    
-    void corePrint(Dart_NativeArguments arguments)
-    {
-        std::stringstream ss;
-        for(int i=0; i<Dart_GetNativeArgumentCount(arguments); i++) {
-            Dart_Handle value = Dart_GetNativeArgument(arguments, i);
-            std::string str = GetString(value);
-            ss << str << "\n";
-        }
-
-        std::cout << ss.str();
-    }
-
     Library* CreateCoreLibrary()
     {
-        coreNativeFunctions.insert(std::make_pair("exit", &coreExit));
-        coreNativeFunctions.insert(std::make_pair("print", &corePrint));
 //        coreNativeFunctions.insert(std::make_pair("Exit", BUILTIN_FUNCTION_NAME(Exit)));
 //        coreNativeFunctions.insert(std::make_pair("Logger_PrintString", BUILTIN_FUNCTION_NAME(Logger_PrintString)));
-        
         return new Library("dart:builtin",
                            NULL,
                            LibraryResolver<coreNativeFunctions>,
@@ -88,10 +51,8 @@ namespace fieldkit { namespace dart {
     
     void IOLibraryInitializer(Dart_Handle library)
     {
-        Dart_Handle timer_closure =
-        Dart_Invoke(library, NewString("_getTimerFactoryClosure"), 0, 0);
-        Dart_Handle isolate_library =
-        Dart_LookupLibrary(NewString("dart:isolate"));
+        Dart_Handle timer_closure = Dart_Invoke(library, NewString("_getTimerFactoryClosure"), 0, 0);
+        Dart_Handle isolate_library = Dart_LookupLibrary(NewString("dart:isolate"));
         
         Dart_Handle args[1];
         args[0] = timer_closure;
@@ -117,19 +78,39 @@ namespace fieldkit { namespace dart {
     {
         assert(builtInLibraries.size() == 0);
         
-        coreLibrary = CreateCoreLibrary();
-        uriLibrary = CreateUriLibrary();
-        ioLibrary = CreateIOLibrary();
+        core_library = CreateCoreLibrary();
+        io_library = CreateIOLibrary();
+        uri_library = CreateUriLibrary();
+        base_library = CreateBaseLibrary();
         
-        builtInLibraries.push_back(coreLibrary);
-        builtInLibraries.push_back(ioLibrary);
-        builtInLibraries.push_back(uriLibrary);
+        builtInLibraries.push_back(core_library);
+        builtInLibraries.push_back(io_library);
+        builtInLibraries.push_back(uri_library);
+        builtInLibraries.push_back(base_library);
     }
 
     void Isolate::ShutdownBuiltinLibraries()
     {
         assert(builtInLibraries.size() > 0);
         while(!builtInLibraries.empty()) delete builtInLibraries.back(), builtInLibraries.pop_back();
+    }
+
+    
+    #pragma mark ---- Execution ----
+    void Isolate::Invoke(const char* function, int argc, Dart_Handle* args)
+    {
+        Dart_EnterScope();
+        Dart_Handle result = Dart_Invoke(library_,
+                                         NewString(function),
+                                         0,
+                                         NULL);
+
+        if (Dart_IsError(result)) {
+            LOG_E(Dart_GetError(result) << " in "<< function)
+        }
+        
+        Dart_RunLoop();
+        Dart_ExitScope();
     }
     
 } }

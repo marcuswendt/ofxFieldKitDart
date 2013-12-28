@@ -31,10 +31,15 @@ namespace fieldkit { namespace dart {
         
         static std::vector<Library*> builtInLibraries;
 
-        static Library* coreLibrary;
-        static Library* uriLibrary;
-        static Library* ioLibrary;
+        // dart core libraries
+        static Library* core_library;
+        static Library* uri_library;
+        static Library* io_library;
         
+        // fieldkit-dart core library
+        static Library* base_library;
+
+        //! calls a function by name with the given arguments
         void Invoke(const char* function, int argc = 0, Dart_Handle* args = NULL);
         
         Dart_Isolate getIsolate() { return isolate_; }

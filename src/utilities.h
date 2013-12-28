@@ -7,9 +7,11 @@
  *   Created by Marcus Wendt on 27/12/2013.
  */
 
+#pragma once
 
 #include <iostream>
 #include <sstream>
+#include <map>
 
 #include "dart_api.h"
 
@@ -34,6 +36,8 @@ namespace fieldkit { namespace dart {
     
     
     // Dart API Utilities
+    #define FKDART_BASE_LIBRARY "fkbase"
+    
 #define CHECK(result)                               \
 {													\
     if(Dart_IsError(result)) {                      \
