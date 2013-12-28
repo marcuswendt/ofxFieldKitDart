@@ -36,13 +36,17 @@ namespace fieldkit { namespace dart {
     
     
     // Dart API Utilities    
-#define CHECK(result)                               \
-{													\
-    if(Dart_IsError(result)) {                      \
-        LOG_E(Dart_GetError(result));               \
-        assert(0);                                  \
-    }												\
-}
+//#define EXPECT_VALID(handle)                                                         \
+//    do {                                                                             \
+//        Dart_Handle tmp_handle = (handle);                                           \
+//        if (Dart_IsError(tmp_handle)) {                                              \
+//            dart::Expect(__FILE__, __LINE__).Fail(                                   \
+//                "expected '%s' to be a valid handle but found an error handle:\n"    \
+//                "    '%s'\n",                                                        \
+//                #handle, Dart_GetError(tmp_handle));                                 \
+//        }                                                                            \
+//    } while (0)
+    
     
 #define CHECK_RETURN(result)                        \
 {													\
