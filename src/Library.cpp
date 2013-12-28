@@ -41,10 +41,6 @@ namespace fieldkit { namespace dart {
     }
     
     
-    Library::Library()
-    : name_(NULL), source_(NULL), initializer_(NULL)
-    {}
-    
     Dart_Handle Library::Load()
     {
         Dart_Handle url = NewString(name_);

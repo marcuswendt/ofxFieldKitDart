@@ -23,7 +23,10 @@ namespace fieldkit { namespace dart {
     
     class Library {
     public:
-        Library();
+        Library()
+        : name_(NULL), source_(NULL), initializer_(NULL) {}
+        
+        virtual ~Library() {}
         
         //! called once the VM is initialised
         virtual void Init() = 0;

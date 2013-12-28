@@ -21,12 +21,10 @@ namespace fieldkit { namespace dart {
     class DartVM {
     public:
         DartVM();
-        ~DartVM() {}
+        ~DartVM();
         
         //! prepares the dart virtual machine
         void Init(const bool checkedMode = true);
-        
-        void Shutdown();
         
         void LoadSnapshot(const std::string file);
         

@@ -34,6 +34,16 @@ namespace fieldkit { namespace dart {
         add(new CoreLibrary());
     }
 
+
+    DartVM::~DartVM()
+    {
+        assert(libraries_.size() > 0);
+        while(!libraries_.empty()) {
+            delete libraries_.back();
+            libraries_.pop_back();
+        }
+    }
+    
     
     #pragma mark ---- Isolate Creation ----
     Dart_Handle LibraryTagHandler(Dart_LibraryTag tag,
@@ -321,13 +331,6 @@ namespace fieldkit { namespace dart {
         // initialise libraries
         for(Library* library : libraries_)
             library->Init();
-    }
-    
-    
-    #pragma mark ---- Shutdown ----
-    void DartVM::Shutdown()
-    {
-//        Isolate::ShutdownBuiltinLibraries();
     }
     
     
