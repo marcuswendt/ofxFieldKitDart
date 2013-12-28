@@ -1,10 +1,12 @@
-//
-//  DartVM.h
-//  07_dart_bindings
-//
-//  Created by Marcus Wendt on 27/12/2013.
-//
-//
+/*
+ *      _____  __  _____  __     ____
+ *     / ___/ / / /____/ / /    /    \   ofxFieldKitDart
+ *    / ___/ /_/ /____/ / /__  /  /  /   (c) 2013, FIELD. All rights reserved.
+ *   /_/        /____/ /____/ /_____/    http://www.field.io
+ *
+ *   Created by Marcus Wendt on 27/12/2013.
+ */
+
 
 #pragma once
 
