@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>AB2C4965-1DC2-42CD-A6BA-F3016304FD95</string>
+	<key>IDESourceControlProjectName</key>
+	<string>07_dart_bindings</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>FBF3E411-9609-46D4-8A8E-11709F6A0545</key>
+		<string>ssh://bitbucket.org/field/124-kapsarc-vision.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>sketches/a thousand minds/07_dart_bindings/07_dart_bindings.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>FBF3E411-9609-46D4-8A8E-11709F6A0545</key>
+		<string>../../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://bitbucket.org/field/124-kapsarc-vision.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>FBF3E411-9609-46D4-8A8E-11709F6A0545</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>FBF3E411-9609-46D4-8A8E-11709F6A0545</string>
+			<key>IDESourceControlWCCName</key>
+			<string>vision</string>
+		</dict>
+	</array>
+</dict>
+</plist>
