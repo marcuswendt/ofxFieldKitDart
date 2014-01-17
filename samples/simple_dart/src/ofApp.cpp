@@ -6,8 +6,20 @@ using namespace fieldkit;
 
 void ofApp::setup()
 {
-    dartVM.Init(true);
-    script = dartVM.LoadScript("../Resources/main.dart");
+	dartVM = fieldkit::dart::DartVM::create( ofToDataPath( "snapshots/full.snapshot" ) );
+
+	dartVM->Init(true);
+
+
+	string filePath	= ofToDataPath( "main.dart" );
+	string fileName	= Poco::Path( filePath ).getFileName();
+	string rootDir	= filePath.substr( 0, filePath.size() - fileName.size() );
+		
+	cout << fileName << endl;
+	cout << rootDir << endl;
+
+	script = dartVM->LoadScript( ofToDataPath( "main.dart" ) );
+
     script->Invoke("main");
     
     sketch = script->New("Sketch");

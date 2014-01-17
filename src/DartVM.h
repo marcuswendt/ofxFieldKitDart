@@ -12,15 +12,26 @@
 
 #include <string>
 #include <vector>
+#include <stdint.h>
+#include <memory>
 
 namespace fieldkit { namespace dart {
     
     class Isolate;
     class Library;
     
+    class DartVM;
+	typedef std::shared_ptr<DartVM> DartVMRef;
+
     class DartVM {
+
     public:
-        DartVM();
+
+        static DartVMRef create( std::string snapshotFilePath )
+		{
+			return DartVMRef( new DartVM( snapshotFilePath) );
+		}
+
         ~DartVM();
         
         //! prepares the dart virtual machine
@@ -39,7 +50,12 @@ namespace fieldkit { namespace dart {
         std::vector<Library*> getLibraries() { return libraries_; }
         
 //        std::string getLibraryScript() { return libraryScript_; }
-        
+
+	protected:
+		
+		DartVM( std::string snapshotFilePath );
+
+
     private:
         uint8_t* snapshotBuffer_;
         std::vector<Library*> libraries_;

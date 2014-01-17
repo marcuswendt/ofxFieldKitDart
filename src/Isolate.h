@@ -25,13 +25,13 @@ namespace fieldkit { namespace dart {
         ~Isolate() {}
 
         //! Invokes a method or function.
-        void Invoke(Dart_Handle target, const char* function, int argc = 0, Dart_Handle* args = NULL);
+        void Invoke(Dart_Handle target, const char* function, int argc = 0, Dart_Handle* args = 0);
 
         //! Invokes a function from the scripts library.
-        void Invoke(const char* function, int argc = 0, Dart_Handle* args = NULL);
+        void Invoke(const char* function, int argc = 0, Dart_Handle* args = 0);
         
         //! Invokes a constructor, creating a new object.
-        Dart_Handle New(const char* type, int argc = 0, Dart_Handle* args = NULL);
+        Dart_Handle New(const char* type, int argc = 0, Dart_Handle* args = 0);
         
         // Accessors
         Dart_Isolate getIsolate() { return isolate_; }

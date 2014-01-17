@@ -10,26 +10,31 @@
 
 #include "DartVM.h"
 
-#include <vector>
+#include <string>
 #include "dart_api.h"
 
 #include "Isolate.h"
 #include "Library.h"
 #include "utilities.h"
+#include "utils/ofUtils.h"
+#include "utils/ofFileUtils.h"
 
 #include "CoreLibrary.h"
 
+using namespace std;
 
 namespace fieldkit { namespace dart {
     
     
-    DartVM::DartVM()
+    DartVM::DartVM( std::string snapshotFilePath )
     {
-        std::string basePath = "../Resources"; // OS dependent
-//        libraryScript_ = basePath + "/" + FKDART_BASE_LIBRARY + ".dart";
-        
-        std::string snapshotFile = basePath + "/snapshot.bin";
-        LoadSnapshot(snapshotFile);
+		if ( !ofFile::doesFileExist( snapshotFilePath ) )
+		{
+			ofLogFatalError( "DartVM cannot find snapshot file!" );
+			// exit( -1 );
+		}
+
+        LoadSnapshot( snapshotFilePath );
         
         add(new CoreLibrary());
     }
@@ -80,15 +85,19 @@ namespace fieldkit { namespace dart {
     }
 
     
-    Dart_Handle ResolveScript(const char* script, Dart_Handle core_library) {
-        char* cwd = getcwd(NULL, 0);
+    Dart_Handle ResolveScript(const char* script, Dart_Handle core_library) 
+	{
+		string filePath	= script;
+		string fileName	= Poco::Path( filePath ).getFileName();
+		string rootDir	= filePath.substr( 0, filePath.size() - fileName.size() );
+	
         Dart_Handle args[3] = {
-            NewString(cwd),
-            NewString(script),
+			NewString( rootDir.c_str() ),
+			NewString( fileName.c_str() ),
             Dart_True()  // TODO: should this be true or false?
         };
         Dart_Handle ret = Dart_Invoke(core_library, NewString("_resolveScriptUri"), 3, args);
-        free(cwd);
+        
         return ret;
     }
     
@@ -164,7 +173,15 @@ namespace fieldkit { namespace dart {
         
         DartVM* dartVm = reinterpret_cast<DartVM*>(data);
         
-        uint8_t* snapshotBuffer = dartVm->getSnapshot();
+		uint8_t* snapshotBuffer;
+		
+		// on windows there is a problem with the snapshot
+		// Dart_CreateIsolate abort() because the snapshot is not a kFull
+		#ifdef _MSC_VER
+			snapshotBuffer = NULL;
+		#else
+			snapshotBuffer = dartVm->getSnapshot();
+		#endif
         
         Dart_Isolate isolate = Dart_CreateIsolate(scriptFile.c_str(),
                                                   main,

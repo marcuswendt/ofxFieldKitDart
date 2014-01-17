@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\ofApp.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ofApp.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\CoreLibrary.cpp">
+      <Filter>NewFilter1\ofxFieldKitDart\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\DartVM.cpp">
+      <Filter>NewFilter1\ofxFieldKitDart\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Isolate.cpp">
+      <Filter>NewFilter1\ofxFieldKitDart\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Library.cpp">
+      <Filter>NewFilter1\ofxFieldKitDart\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\utilities.cpp">
+      <Filter>NewFilter1\ofxFieldKitDart\src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{d8376475-7454-4a24-b08a-aac121d3ad6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NewFilter1">
+      <UniqueIdentifier>{64f1f014-031c-4f56-af33-c9e8e39635a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NewFilter1\ofxFieldKitDart">
+      <UniqueIdentifier>{5e182d0a-44cf-4aa1-ad64-fd8ee871b0d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NewFilter1\ofxFieldKitDart\src">
+      <UniqueIdentifier>{9d2c1bb4-a801-41bc-b912-f8b644811a3d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\ofApp.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ofApp.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\CoreLibrary.h">
+      <Filter>NewFilter1\ofxFieldKitDart\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\DartVM.h">
+      <Filter>NewFilter1\ofxFieldKitDart\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Isolate.h">
+      <Filter>NewFilter1\ofxFieldKitDart\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Library.h">
+      <Filter>NewFilter1\ofxFieldKitDart\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\utilities.h">
+      <Filter>NewFilter1\ofxFieldKitDart\src</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="icon.rc" />
+  </ItemGroup>
+</Project>

@@ -79,3 +79,4 @@ Copyright (c) 2013 Marcus Wendt <marcus@field.io>
 * built-in libraries as modules, especially dart:io
 * replace LOG_E with Dart_NewApiError etc.
 * More spectacular samples ;-)
+* Snapshots don't work on Windows, Dart_CreateIsolate() quit the app because the snapshot is not kFull. To fix this the snapshot is set ```NULL``` on windows. DartVM.cpp\(\#178\)

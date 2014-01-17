@@ -1,2 +1,3 @@
 samples/*/bin
+samples/*/obj
 *.xcuserdatad
