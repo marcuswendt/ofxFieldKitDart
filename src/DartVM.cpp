@@ -195,22 +195,21 @@ namespace fieldkit { namespace dart {
         
 		uint8_t* snapshotBuffer = NULL;
 		
-		// on windows there is a problem with the snapshot
-		// Dart_CreateIsolate abort() because the snapshot is not a kFull
-		#ifdef _MSC_VER
-			snapshotBuffer = NULL;
-		#else
-			snapshotBuffer = dartVm->getSnapshot();
-		#endif
+		snapshotBuffer = dartVm->getSnapshot();
         
         Dart_Isolate isolate = Dart_CreateIsolate(scriptFile.c_str(),
                                                   main,
                                                   snapshotBuffer,
                                                   dartVm,
                                                   error);
-        assert(isolate);
         
-        LOG_I("Created isolate");
+		if (isolate==NULL) {
+			ofLogError() << "Trouble creating Isolate" << error;
+				return NULL;
+		} else {
+			ofLogNotice() << "Successfully created Isolate";
+		}
+        
         Dart_EnterScope();
         
         Dart_Handle result = Dart_SetLibraryTagHandler(LibraryTagHandler);
