@@ -3,3 +3,4 @@ samples/*/obj
 *.xcuserdatad
 
 .DS_Store
+example-simple_dart/obj/

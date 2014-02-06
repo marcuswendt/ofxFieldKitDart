@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<ItemGroup>
+		<ClCompile Include="src\ofApp.cpp">
+			<Filter>src</Filter>
+		</ClCompile>
+		<ClCompile Include="src\main.cpp">
+			<Filter>src</Filter>
+		</ClCompile>
+		<ClCompile Include="src\main.cpp">
+			<Filter>src</Filter>
+		</ClCompile>
+		<ClCompile Include="src\ofApp.cpp">
+			<Filter>src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxFieldKitDart\src\CoreLibrary.cpp">
+			<Filter>addons\ofxFieldKitDart\src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxFieldKitDart\src\DartVM.cpp">
+			<Filter>addons\ofxFieldKitDart\src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxFieldKitDart\src\Isolate.cpp">
+			<Filter>addons\ofxFieldKitDart\src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxFieldKitDart\src\Library.cpp">
+			<Filter>addons\ofxFieldKitDart\src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxFieldKitDart\src\utilities.cpp">
+			<Filter>addons\ofxFieldKitDart\src</Filter>
+		</ClCompile>
+	</ItemGroup>
+	<ItemGroup>
+		<Filter Include="src">
+			<UniqueIdentifier>{d8376475-7454-4a24-b08a-aac121d3ad6f}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons">
+			<UniqueIdentifier>{71834F65-F3A9-211E-73B8-DC85}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxFieldKitDart">
+			<UniqueIdentifier>{60798208-0C3D-D321-CB0F-C159}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxFieldKitDart\src">
+			<UniqueIdentifier>{BD4B6F51-7E97-0599-50D7-A425}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxFieldKitDart\libs">
+			<UniqueIdentifier>{3363EDF8-B42E-75EA-B9D1-52FA}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxFieldKitDart\libs\dart-runtime">
+			<UniqueIdentifier>{A29B7B00-56F1-F163-A235-3840}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxFieldKitDart\libs\dart-runtime\include">
+			<UniqueIdentifier>{FD26F193-4871-80F4-58C5-93EA}</UniqueIdentifier>
+		</Filter>
+	</ItemGroup>
+	<ItemGroup>
+		<ClInclude Include="src\ofApp.h">
+			<Filter>src</Filter>
+		</ClInclude>
+		<ClInclude Include="src\ofApp.h">
+			<Filter>src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxFieldKitDart\src\CoreLibrary.h">
+			<Filter>addons\ofxFieldKitDart\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxFieldKitDart\src\DartVM.h">
+			<Filter>addons\ofxFieldKitDart\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxFieldKitDart\src\Isolate.h">
+			<Filter>addons\ofxFieldKitDart\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxFieldKitDart\src\Library.h">
+			<Filter>addons\ofxFieldKitDart\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxFieldKitDart\src\utilities.h">
+			<Filter>addons\ofxFieldKitDart\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxFieldKitDart\libs\dart-runtime\include\dart_api.h">
+			<Filter>addons\ofxFieldKitDart\libs\dart-runtime\include</Filter>
+		</ClInclude>
+	</ItemGroup>
+	<ItemGroup>
+		<ResourceCompile Include="icon.rc" />
+	</ItemGroup>
+</Project>

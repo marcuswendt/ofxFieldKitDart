@@ -13,8 +13,9 @@ void ofApp::setup()
 	script = dartVM->LoadScript( "main.dart" );
 
     script->Invoke("main");
-    
-    sketch = script->New("Sketch");
+    script->Invoke("main");
+
+    sketch = script->New("Sketch",0,NULL);
 }
 
 
