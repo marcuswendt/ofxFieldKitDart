@@ -21,7 +21,7 @@ public:
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
     
-    fieldkit::dart::DartVMRef	dartVM;
+    shared_ptr<fieldkit::dart::DartVM>	dartVM;
     fieldkit::dart::Isolate*	script;
     Dart_Handle					sketch;
 };

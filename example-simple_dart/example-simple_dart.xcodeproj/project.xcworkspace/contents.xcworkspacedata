@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:simple_dart.xcodeproj">
+      location = "self:example-simple_dart.xcodeproj">
    </FileRef>
 </Workspace>

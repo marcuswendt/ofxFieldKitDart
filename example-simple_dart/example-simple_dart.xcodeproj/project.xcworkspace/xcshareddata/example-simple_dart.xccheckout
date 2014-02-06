@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>AEEBCABE-4E85-415A-8F08-C6C8B53C3C69</string>
+	<key>IDESourceControlProjectName</key>
+	<string>example-simple_dart</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>2A150F31-16CC-42ED-85EE-238C675A2B74</key>
+		<string>https://bitbucket.org/field/124-kapsarc-vision.git</string>
+		<key>A3B56483-3CB8-4E4B-825C-DAB62C4670FA</key>
+		<string>https://github.com/field/ofxFieldKitDart.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>addons/ofxFieldKitDart/example-simple_dart/example-simple_dart.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>2A150F31-16CC-42ED-85EE-238C675A2B74</key>
+		<string>../../../../..</string>
+		<key>A3B56483-3CB8-4E4B-825C-DAB62C4670FA</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/field/ofxFieldKitDart.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>2A150F31-16CC-42ED-85EE-238C675A2B74</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>2A150F31-16CC-42ED-85EE-238C675A2B74</string>
+			<key>IDESourceControlWCCName</key>
+			<string>field</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>A3B56483-3CB8-4E4B-825C-DAB62C4670FA</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxFieldKitDart</string>
+		</dict>
+	</array>
+</dict>
+</plist>

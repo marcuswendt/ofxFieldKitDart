@@ -7,21 +7,49 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2C4829E8186FB47600046B3C /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C91347C186F314E00B0CBFA /* openFrameworksDebug.a */; };
-		2C9133F9186CFBF000B0CBFA /* main.dart in Copy Files */ = {isa = PBXBuildFile; fileRef = 2CB202FF186C79C600A5386D /* main.dart */; };
-		2C913433186D3CE000B0CBFA /* libdart_builtin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C913425186D3C8800B0CBFA /* libdart_builtin.a */; };
-		2C913434186D3CE000B0CBFA /* libdart_lib_withcore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C913426186D3C8800B0CBFA /* libdart_lib_withcore.a */; };
-		2C913435186D3CE000B0CBFA /* libdart_vm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C913427186D3C8800B0CBFA /* libdart_vm.a */; };
-		2C913436186D3CE000B0CBFA /* libdart_withcore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C913428186D3C8800B0CBFA /* libdart_withcore.a */; };
-		2C913437186D3CE000B0CBFA /* libdouble_conversion.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C913429186D3C8800B0CBFA /* libdouble_conversion.a */; };
-		2C913438186D3CE000B0CBFA /* libjscre.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C91342A186D3C8800B0CBFA /* libjscre.a */; };
-		2C913439186D3D3E00B0CBFA /* snapshot.bin in Copy Files */ = {isa = PBXBuildFile; fileRef = 2C91342B186D3C8800B0CBFA /* snapshot.bin */; };
-		2C91343C186D9D0100B0CBFA /* DartVM.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C91343A186D9D0100B0CBFA /* DartVM.cpp */; };
-		2C91343F186D9D0E00B0CBFA /* Isolate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C91343D186D9D0E00B0CBFA /* Isolate.cpp */; };
-		2C913442186D9D1800B0CBFA /* Library.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C913440186D9D1800B0CBFA /* Library.cpp */; };
-		2C913445186DB23700B0CBFA /* utilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C913444186DB23700B0CBFA /* utilities.cpp */; };
-		2C91346A186E90B800B0CBFA /* CoreLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C913468186E90B800B0CBFA /* CoreLibrary.cpp */; };
+		22A7813E18A3A767000D9449 /* CoreLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22A7810418A3A767000D9449 /* CoreLibrary.cpp */; };
+		22A7813F18A3A767000D9449 /* DartVM.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22A7810618A3A767000D9449 /* DartVM.cpp */; };
+		22A7814018A3A767000D9449 /* Isolate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22A7810818A3A767000D9449 /* Isolate.cpp */; };
+		22A7814118A3A767000D9449 /* Library.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22A7810A18A3A767000D9449 /* Library.cpp */; };
+		22A7814218A3A767000D9449 /* utilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22A7810C18A3A767000D9449 /* utilities.cpp */; };
+		22A7814318A3A767000D9449 /* libdart_builtin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7811518A3A767000D9449 /* libdart_builtin.a */; };
+		22A7814418A3A768000D9449 /* libdart_lib_withcore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7811618A3A767000D9449 /* libdart_lib_withcore.a */; };
+		22A7814518A3A768000D9449 /* libdart_vm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7811718A3A767000D9449 /* libdart_vm.a */; };
+		22A7814618A3A768000D9449 /* libdart_withcore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7811818A3A767000D9449 /* libdart_withcore.a */; };
+		22A7814718A3A768000D9449 /* libdouble_conversion.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7811918A3A767000D9449 /* libdouble_conversion.a */; };
+		22A7814818A3A768000D9449 /* libjscre.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7811A18A3A767000D9449 /* libjscre.a */; };
+		22A7814918A3A768000D9449 /* libdart_builtin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7811C18A3A767000D9449 /* libdart_builtin.a */; };
+		22A7814A18A3A768000D9449 /* libdart_lib_withcore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7811D18A3A767000D9449 /* libdart_lib_withcore.a */; };
+		22A7814B18A3A768000D9449 /* libdart_vm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7811E18A3A767000D9449 /* libdart_vm.a */; };
+		22A7814C18A3A768000D9449 /* libdart_withcore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7811F18A3A767000D9449 /* libdart_withcore.a */; };
+		22A7814D18A3A768000D9449 /* libdouble_conversion.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7812018A3A767000D9449 /* libdouble_conversion.a */; };
+		22A7814E18A3A768000D9449 /* libjscre.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7812118A3A767000D9449 /* libjscre.a */; };
+		22A7814F18A3A768000D9449 /* libdart_builtin.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7812418A3A767000D9449 /* libdart_builtin.lib */; };
+		22A7815018A3A768000D9449 /* libdart_builtin_d.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7812518A3A767000D9449 /* libdart_builtin_d.lib */; };
+		22A7815118A3A768000D9449 /* libdart_lib_withcore.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7812618A3A767000D9449 /* libdart_lib_withcore.lib */; };
+		22A7815218A3A768000D9449 /* libdart_lib_withcore_d.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7812718A3A767000D9449 /* libdart_lib_withcore_d.lib */; };
+		22A7815318A3A768000D9449 /* libdart_vm.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7812818A3A767000D9449 /* libdart_vm.lib */; };
+		22A7815418A3A768000D9449 /* libdart_vm_d.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7812918A3A767000D9449 /* libdart_vm_d.lib */; };
+		22A7815518A3A768000D9449 /* libdart_withcore.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7812A18A3A767000D9449 /* libdart_withcore.lib */; };
+		22A7815618A3A768000D9449 /* libdart_withcore_d.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7812B18A3A767000D9449 /* libdart_withcore_d.lib */; };
+		22A7815718A3A768000D9449 /* libdouble_conversion.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7812C18A3A767000D9449 /* libdouble_conversion.lib */; };
+		22A7815818A3A768000D9449 /* libdouble_conversion_d.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7812D18A3A767000D9449 /* libdouble_conversion_d.lib */; };
+		22A7815918A3A768000D9449 /* libjscre.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7812E18A3A767000D9449 /* libjscre.lib */; };
+		22A7815A18A3A768000D9449 /* libjscre_d.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7812F18A3A767000D9449 /* libjscre_d.lib */; };
+		22A7815B18A3A768000D9449 /* libdart_builtin.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7813118A3A767000D9449 /* libdart_builtin.lib */; };
+		22A7815C18A3A768000D9449 /* libdart_builtin_d.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7813218A3A767000D9449 /* libdart_builtin_d.lib */; };
+		22A7815D18A3A768000D9449 /* libdart_lib_withcore.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7813318A3A767000D9449 /* libdart_lib_withcore.lib */; };
+		22A7815E18A3A768000D9449 /* libdart_lib_withcore_d.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7813418A3A767000D9449 /* libdart_lib_withcore_d.lib */; };
+		22A7815F18A3A768000D9449 /* libdart_vm.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7813518A3A767000D9449 /* libdart_vm.lib */; };
+		22A7816018A3A768000D9449 /* libdart_vm_d.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7813618A3A767000D9449 /* libdart_vm_d.lib */; };
+		22A7816118A3A768000D9449 /* libdart_withcore.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7813718A3A767000D9449 /* libdart_withcore.lib */; };
+		22A7816218A3A768000D9449 /* libdart_withcore_d.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7813818A3A767000D9449 /* libdart_withcore_d.lib */; };
+		22A7816318A3A768000D9449 /* libdouble_conversion.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7813918A3A767000D9449 /* libdouble_conversion.lib */; };
+		22A7816418A3A768000D9449 /* libdouble_conversion_d.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7813A18A3A767000D9449 /* libdouble_conversion_d.lib */; };
+		22A7816518A3A768000D9449 /* libjscre.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7813B18A3A767000D9449 /* libjscre.lib */; };
+		22A7816618A3A768000D9449 /* libjscre_d.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7813C18A3A767000D9449 /* libjscre_d.lib */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
+		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
 		E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */; };
 		E45BE97D0E8CC7DD009D7055 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9730E8CC7DD009D7055 /* AudioToolbox.framework */; };
@@ -43,35 +71,23 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		2C4829E5186FB37200046B3C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = E4B27C1410CBEB8E00536013;
-			remoteInfo = openFrameworks;
-		};
-		2C91347B186F314E00B0CBFA /* PBXContainerItemProxy */ = {
+		E4328147138ABC890047C5CB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = E4B27C1510CBEB8E00536013;
 			remoteInfo = openFrameworks;
 		};
+		E4EEB9AB138B136A00A80321 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = E4B27C1410CBEB8E00536013;
+			remoteInfo = openFrameworks;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		2CB20308186C7DFE00A5386D /* Copy Files */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 7;
-			files = (
-				2C9133F9186CFBF000B0CBFA /* main.dart in Copy Files */,
-				2C913439186D3D3E00B0CBFA /* snapshot.bin in Copy Files */,
-			);
-			name = "Copy Files";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		E4C2427710CC5ABF004149E2 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -85,34 +101,56 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2C913417186D3C8800B0CBFA /* dart_api.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dart_api.h; sourceTree = "<group>"; };
-		2C91341E186D3C8800B0CBFA /* libdart_builtin.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdart_builtin.a; sourceTree = "<group>"; };
-		2C91341F186D3C8800B0CBFA /* libdart_lib_withcore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdart_lib_withcore.a; sourceTree = "<group>"; };
-		2C913420186D3C8800B0CBFA /* libdart_vm.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdart_vm.a; sourceTree = "<group>"; };
-		2C913421186D3C8800B0CBFA /* libdart_withcore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdart_withcore.a; sourceTree = "<group>"; };
-		2C913422186D3C8800B0CBFA /* libdouble_conversion.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdouble_conversion.a; sourceTree = "<group>"; };
-		2C913423186D3C8800B0CBFA /* libjscre.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libjscre.a; sourceTree = "<group>"; };
-		2C913425186D3C8800B0CBFA /* libdart_builtin.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdart_builtin.a; sourceTree = "<group>"; };
-		2C913426186D3C8800B0CBFA /* libdart_lib_withcore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdart_lib_withcore.a; sourceTree = "<group>"; };
-		2C913427186D3C8800B0CBFA /* libdart_vm.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdart_vm.a; sourceTree = "<group>"; };
-		2C913428186D3C8800B0CBFA /* libdart_withcore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdart_withcore.a; sourceTree = "<group>"; };
-		2C913429186D3C8800B0CBFA /* libdouble_conversion.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdouble_conversion.a; sourceTree = "<group>"; };
-		2C91342A186D3C8800B0CBFA /* libjscre.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libjscre.a; sourceTree = "<group>"; };
-		2C91342B186D3C8800B0CBFA /* snapshot.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = snapshot.bin; sourceTree = "<group>"; };
-		2C91342C186D3C8800B0CBFA /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		2C91343A186D9D0100B0CBFA /* DartVM.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DartVM.cpp; sourceTree = "<group>"; };
-		2C91343B186D9D0100B0CBFA /* DartVM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DartVM.h; sourceTree = "<group>"; };
-		2C91343D186D9D0E00B0CBFA /* Isolate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Isolate.cpp; sourceTree = "<group>"; };
-		2C91343E186D9D0E00B0CBFA /* Isolate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Isolate.h; sourceTree = "<group>"; };
-		2C913440186D9D1800B0CBFA /* Library.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Library.cpp; sourceTree = "<group>"; };
-		2C913441186D9D1800B0CBFA /* Library.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Library.h; sourceTree = "<group>"; };
-		2C913443186DA1FD00B0CBFA /* utilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = utilities.h; sourceTree = "<group>"; };
-		2C913444186DB23700B0CBFA /* utilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = utilities.cpp; sourceTree = "<group>"; };
-		2C913468186E90B800B0CBFA /* CoreLibrary.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CoreLibrary.cpp; sourceTree = "<group>"; };
-		2C913469186E90B800B0CBFA /* CoreLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreLibrary.h; sourceTree = "<group>"; };
-		2CB202FF186C79C600A5386D /* main.dart */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.dart; sourceTree = "<group>"; };
-		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
-		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
+		22A7810418A3A767000D9449 /* CoreLibrary.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CoreLibrary.cpp; sourceTree = "<group>"; };
+		22A7810518A3A767000D9449 /* CoreLibrary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreLibrary.h; sourceTree = "<group>"; };
+		22A7810618A3A767000D9449 /* DartVM.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DartVM.cpp; sourceTree = "<group>"; };
+		22A7810718A3A767000D9449 /* DartVM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DartVM.h; sourceTree = "<group>"; };
+		22A7810818A3A767000D9449 /* Isolate.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Isolate.cpp; sourceTree = "<group>"; };
+		22A7810918A3A767000D9449 /* Isolate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Isolate.h; sourceTree = "<group>"; };
+		22A7810A18A3A767000D9449 /* Library.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Library.cpp; sourceTree = "<group>"; };
+		22A7810B18A3A767000D9449 /* Library.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Library.h; sourceTree = "<group>"; };
+		22A7810C18A3A767000D9449 /* utilities.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = utilities.cpp; sourceTree = "<group>"; };
+		22A7810D18A3A767000D9449 /* utilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = utilities.h; sourceTree = "<group>"; };
+		22A7811118A3A767000D9449 /* dart_api.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dart_api.h; sourceTree = "<group>"; };
+		22A7811518A3A767000D9449 /* libdart_builtin.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdart_builtin.a; sourceTree = "<group>"; };
+		22A7811618A3A767000D9449 /* libdart_lib_withcore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdart_lib_withcore.a; sourceTree = "<group>"; };
+		22A7811718A3A767000D9449 /* libdart_vm.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdart_vm.a; sourceTree = "<group>"; };
+		22A7811818A3A767000D9449 /* libdart_withcore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdart_withcore.a; sourceTree = "<group>"; };
+		22A7811918A3A767000D9449 /* libdouble_conversion.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdouble_conversion.a; sourceTree = "<group>"; };
+		22A7811A18A3A767000D9449 /* libjscre.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libjscre.a; sourceTree = "<group>"; };
+		22A7811C18A3A767000D9449 /* libdart_builtin.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdart_builtin.a; sourceTree = "<group>"; };
+		22A7811D18A3A767000D9449 /* libdart_lib_withcore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdart_lib_withcore.a; sourceTree = "<group>"; };
+		22A7811E18A3A767000D9449 /* libdart_vm.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdart_vm.a; sourceTree = "<group>"; };
+		22A7811F18A3A767000D9449 /* libdart_withcore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdart_withcore.a; sourceTree = "<group>"; };
+		22A7812018A3A767000D9449 /* libdouble_conversion.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdouble_conversion.a; sourceTree = "<group>"; };
+		22A7812118A3A767000D9449 /* libjscre.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libjscre.a; sourceTree = "<group>"; };
+		22A7812418A3A767000D9449 /* libdart_builtin.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdart_builtin.lib; sourceTree = "<group>"; };
+		22A7812518A3A767000D9449 /* libdart_builtin_d.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdart_builtin_d.lib; sourceTree = "<group>"; };
+		22A7812618A3A767000D9449 /* libdart_lib_withcore.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdart_lib_withcore.lib; sourceTree = "<group>"; };
+		22A7812718A3A767000D9449 /* libdart_lib_withcore_d.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdart_lib_withcore_d.lib; sourceTree = "<group>"; };
+		22A7812818A3A767000D9449 /* libdart_vm.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdart_vm.lib; sourceTree = "<group>"; };
+		22A7812918A3A767000D9449 /* libdart_vm_d.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdart_vm_d.lib; sourceTree = "<group>"; };
+		22A7812A18A3A767000D9449 /* libdart_withcore.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdart_withcore.lib; sourceTree = "<group>"; };
+		22A7812B18A3A767000D9449 /* libdart_withcore_d.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdart_withcore_d.lib; sourceTree = "<group>"; };
+		22A7812C18A3A767000D9449 /* libdouble_conversion.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdouble_conversion.lib; sourceTree = "<group>"; };
+		22A7812D18A3A767000D9449 /* libdouble_conversion_d.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdouble_conversion_d.lib; sourceTree = "<group>"; };
+		22A7812E18A3A767000D9449 /* libjscre.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libjscre.lib; sourceTree = "<group>"; };
+		22A7812F18A3A767000D9449 /* libjscre_d.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libjscre_d.lib; sourceTree = "<group>"; };
+		22A7813118A3A767000D9449 /* libdart_builtin.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdart_builtin.lib; sourceTree = "<group>"; };
+		22A7813218A3A767000D9449 /* libdart_builtin_d.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdart_builtin_d.lib; sourceTree = "<group>"; };
+		22A7813318A3A767000D9449 /* libdart_lib_withcore.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdart_lib_withcore.lib; sourceTree = "<group>"; };
+		22A7813418A3A767000D9449 /* libdart_lib_withcore_d.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdart_lib_withcore_d.lib; sourceTree = "<group>"; };
+		22A7813518A3A767000D9449 /* libdart_vm.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdart_vm.lib; sourceTree = "<group>"; };
+		22A7813618A3A767000D9449 /* libdart_vm_d.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdart_vm_d.lib; sourceTree = "<group>"; };
+		22A7813718A3A767000D9449 /* libdart_withcore.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdart_withcore.lib; sourceTree = "<group>"; };
+		22A7813818A3A767000D9449 /* libdart_withcore_d.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdart_withcore_d.lib; sourceTree = "<group>"; };
+		22A7813918A3A767000D9449 /* libdouble_conversion.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdouble_conversion.lib; sourceTree = "<group>"; };
+		22A7813A18A3A767000D9449 /* libdouble_conversion_d.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdouble_conversion_d.lib; sourceTree = "<group>"; };
+		22A7813B18A3A767000D9449 /* libjscre.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libjscre.lib; sourceTree = "<group>"; };
+		22A7813C18A3A767000D9449 /* libjscre_d.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libjscre_d.lib; sourceTree = "<group>"; };
+		22A7813D18A3A767000D9449 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
+		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
 		E45BE9730E8CC7DD009D7055 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = /System/Library/Frameworks/AudioToolbox.framework; sourceTree = "<absolute>"; };
@@ -122,7 +160,7 @@
 		E45BE9770E8CC7DD009D7055 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
 		E45BE9790E8CC7DD009D7055 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		E45BE97A0E8CC7DD009D7055 /* QuickTime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickTime.framework; path = /System/Library/Frameworks/QuickTime.framework; sourceTree = "<absolute>"; };
-		E4B69B5B0A3A1756003C02F2 /* simple_dartDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = simple_dartDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4B69B5B0A3A1756003C02F2 /* example-simple_dartDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "example-simple_dartDebug.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4B69E1D0A3A1BDC003C02F2 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = SOURCE_ROOT; };
 		E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofApp.cpp; path = src/ofApp.cpp; sourceTree = SOURCE_ROOT; };
 		E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = ofApp.h; path = src/ofApp.h; sourceTree = SOURCE_ROOT; };
@@ -130,7 +168,7 @@
 		E4C2424410CC5A17004149E2 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		E4C2424510CC5A17004149E2 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		E4C2424610CC5A17004149E2 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
-		E4EB691F138AFCF100A09F29 /* CoreOF.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = CoreOF.xcconfig; path = ../../../../libs/openFrameworksCompiled/project/osx/CoreOF.xcconfig; sourceTree = SOURCE_ROOT; };
+		E4EB691F138AFCF100A09F29 /* CoreOF.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = CoreOF.xcconfig; path = ../../../libs/openFrameworksCompiled/project/osx/CoreOF.xcconfig; sourceTree = SOURCE_ROOT; };
 		E4EB6923138AFD0F00A09F29 /* Project.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Project.xcconfig; sourceTree = "<group>"; };
 		E7E077E415D3B63C0020DFD4 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = /System/Library/Frameworks/CoreVideo.framework; sourceTree = "<absolute>"; };
 		E7E077E715D3B6510020DFD4 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = /System/Library/Frameworks/QTKit.framework; sourceTree = "<absolute>"; };
@@ -142,28 +180,58 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C4829E8186FB47600046B3C /* openFrameworksDebug.a in Frameworks */,
-				2C913433186D3CE000B0CBFA /* libdart_builtin.a in Frameworks */,
-				2C913434186D3CE000B0CBFA /* libdart_lib_withcore.a in Frameworks */,
-				2C913435186D3CE000B0CBFA /* libdart_vm.a in Frameworks */,
-				2C913436186D3CE000B0CBFA /* libdart_withcore.a in Frameworks */,
-				2C913437186D3CE000B0CBFA /* libdouble_conversion.a in Frameworks */,
-				2C913438186D3CE000B0CBFA /* libjscre.a in Frameworks */,
+				22A7814D18A3A768000D9449 /* libdouble_conversion.a in Frameworks */,
+				22A7814918A3A768000D9449 /* libdart_builtin.a in Frameworks */,
 				E7F985F815E0DEA3003869B5 /* Accelerate.framework in Frameworks */,
+				22A7815418A3A768000D9449 /* libdart_vm_d.lib in Frameworks */,
 				E7E077E815D3B6510020DFD4 /* QTKit.framework in Frameworks */,
+				22A7814818A3A768000D9449 /* libjscre.a in Frameworks */,
 				E4EB6799138ADC1D00A09F29 /* GLUT.framework in Frameworks */,
+				22A7816418A3A768000D9449 /* libdouble_conversion_d.lib in Frameworks */,
+				22A7815018A3A768000D9449 /* libdart_builtin_d.lib in Frameworks */,
+				E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */,
 				E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */,
+				22A7815B18A3A768000D9449 /* libdart_builtin.lib in Frameworks */,
+				22A7815C18A3A768000D9449 /* libdart_builtin_d.lib in Frameworks */,
+				22A7815E18A3A768000D9449 /* libdart_lib_withcore_d.lib in Frameworks */,
+				22A7815318A3A768000D9449 /* libdart_vm.lib in Frameworks */,
+				22A7816318A3A768000D9449 /* libdouble_conversion.lib in Frameworks */,
+				22A7815218A3A768000D9449 /* libdart_lib_withcore_d.lib in Frameworks */,
+				22A7816118A3A768000D9449 /* libdart_withcore.lib in Frameworks */,
 				E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */,
+				22A7816518A3A768000D9449 /* libjscre.lib in Frameworks */,
+				22A7815818A3A768000D9449 /* libdouble_conversion_d.lib in Frameworks */,
 				E45BE97D0E8CC7DD009D7055 /* AudioToolbox.framework in Frameworks */,
 				E45BE97E0E8CC7DD009D7055 /* Carbon.framework in Frameworks */,
+				22A7814C18A3A768000D9449 /* libdart_withcore.a in Frameworks */,
+				22A7816618A3A768000D9449 /* libjscre_d.lib in Frameworks */,
 				E45BE97F0E8CC7DD009D7055 /* CoreAudio.framework in Frameworks */,
 				E45BE9800E8CC7DD009D7055 /* CoreFoundation.framework in Frameworks */,
+				22A7816218A3A768000D9449 /* libdart_withcore_d.lib in Frameworks */,
 				E45BE9810E8CC7DD009D7055 /* CoreServices.framework in Frameworks */,
+				22A7814B18A3A768000D9449 /* libdart_vm.a in Frameworks */,
+				22A7814F18A3A768000D9449 /* libdart_builtin.lib in Frameworks */,
+				22A7814518A3A768000D9449 /* libdart_vm.a in Frameworks */,
+				22A7815D18A3A768000D9449 /* libdart_lib_withcore.lib in Frameworks */,
+				22A7815918A3A768000D9449 /* libjscre.lib in Frameworks */,
 				E45BE9830E8CC7DD009D7055 /* OpenGL.framework in Frameworks */,
+				22A7814318A3A767000D9449 /* libdart_builtin.a in Frameworks */,
+				22A7815618A3A768000D9449 /* libdart_withcore_d.lib in Frameworks */,
+				22A7814A18A3A768000D9449 /* libdart_lib_withcore.a in Frameworks */,
+				22A7814718A3A768000D9449 /* libdouble_conversion.a in Frameworks */,
 				E45BE9840E8CC7DD009D7055 /* QuickTime.framework in Frameworks */,
+				22A7815518A3A768000D9449 /* libdart_withcore.lib in Frameworks */,
 				E4C2424710CC5A17004149E2 /* AppKit.framework in Frameworks */,
+				22A7815118A3A768000D9449 /* libdart_lib_withcore.lib in Frameworks */,
 				E4C2424810CC5A17004149E2 /* Cocoa.framework in Frameworks */,
+				22A7816018A3A768000D9449 /* libdart_vm_d.lib in Frameworks */,
+				22A7815A18A3A768000D9449 /* libjscre_d.lib in Frameworks */,
+				22A7815F18A3A768000D9449 /* libdart_vm.lib in Frameworks */,
+				22A7814418A3A768000D9449 /* libdart_lib_withcore.a in Frameworks */,
 				E4C2424910CC5A17004149E2 /* IOKit.framework in Frameworks */,
+				22A7815718A3A768000D9449 /* libdouble_conversion.lib in Frameworks */,
+				22A7814E18A3A768000D9449 /* libjscre.a in Frameworks */,
+				22A7814618A3A768000D9449 /* libdart_withcore.a in Frameworks */,
 				E7E077E515D3B63C0020DFD4 /* CoreVideo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -171,107 +239,155 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2C913415186D3C8800B0CBFA /* dart-runtime */ = {
+		22A7810218A3A767000D9449 /* ofxFieldKitDart */ = {
 			isa = PBXGroup;
 			children = (
-				2C913416186D3C8800B0CBFA /* include */,
-				2C91341B186D3C8800B0CBFA /* lib */,
-				2C91342C186D3C8800B0CBFA /* README.md */,
+				22A7810318A3A767000D9449 /* src */,
+				22A7810E18A3A767000D9449 /* libs */,
+			);
+			name = ofxFieldKitDart;
+			sourceTree = "<group>";
+		};
+		22A7810318A3A767000D9449 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				22A7810418A3A767000D9449 /* CoreLibrary.cpp */,
+				22A7810518A3A767000D9449 /* CoreLibrary.h */,
+				22A7810618A3A767000D9449 /* DartVM.cpp */,
+				22A7810718A3A767000D9449 /* DartVM.h */,
+				22A7810818A3A767000D9449 /* Isolate.cpp */,
+				22A7810918A3A767000D9449 /* Isolate.h */,
+				22A7810A18A3A767000D9449 /* Library.cpp */,
+				22A7810B18A3A767000D9449 /* Library.h */,
+				22A7810C18A3A767000D9449 /* utilities.cpp */,
+				22A7810D18A3A767000D9449 /* utilities.h */,
+			);
+			name = src;
+			path = ../src;
+			sourceTree = "<group>";
+		};
+		22A7810E18A3A767000D9449 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				22A7810F18A3A767000D9449 /* dart-runtime */,
+			);
+			name = libs;
+			path = ../libs;
+			sourceTree = "<group>";
+		};
+		22A7810F18A3A767000D9449 /* dart-runtime */ = {
+			isa = PBXGroup;
+			children = (
+				22A7811018A3A767000D9449 /* include */,
+				22A7811218A3A767000D9449 /* lib */,
+				22A7813D18A3A767000D9449 /* README.md */,
 			);
 			path = "dart-runtime";
 			sourceTree = "<group>";
 		};
-		2C913416186D3C8800B0CBFA /* include */ = {
+		22A7811018A3A767000D9449 /* include */ = {
 			isa = PBXGroup;
 			children = (
-				2C913417186D3C8800B0CBFA /* dart_api.h */,
+				22A7811118A3A767000D9449 /* dart_api.h */,
 			);
 			path = include;
 			sourceTree = "<group>";
 		};
-		2C91341B186D3C8800B0CBFA /* lib */ = {
+		22A7811218A3A767000D9449 /* lib */ = {
 			isa = PBXGroup;
 			children = (
-				2C91341C186D3C8800B0CBFA /* osx */,
-				2C91342B186D3C8800B0CBFA /* snapshot.bin */,
+				22A7811318A3A767000D9449 /* osx */,
+				22A7812218A3A767000D9449 /* vs */,
 			);
 			path = lib;
 			sourceTree = "<group>";
 		};
-		2C91341C186D3C8800B0CBFA /* osx */ = {
+		22A7811318A3A767000D9449 /* osx */ = {
 			isa = PBXGroup;
 			children = (
-				2C91341D186D3C8800B0CBFA /* debug */,
-				2C913424186D3C8800B0CBFA /* release */,
+				22A7811418A3A767000D9449 /* debug */,
+				22A7811B18A3A767000D9449 /* release */,
 			);
 			path = osx;
 			sourceTree = "<group>";
 		};
-		2C91341D186D3C8800B0CBFA /* debug */ = {
+		22A7811418A3A767000D9449 /* debug */ = {
 			isa = PBXGroup;
 			children = (
-				2C91341E186D3C8800B0CBFA /* libdart_builtin.a */,
-				2C91341F186D3C8800B0CBFA /* libdart_lib_withcore.a */,
-				2C913420186D3C8800B0CBFA /* libdart_vm.a */,
-				2C913421186D3C8800B0CBFA /* libdart_withcore.a */,
-				2C913422186D3C8800B0CBFA /* libdouble_conversion.a */,
-				2C913423186D3C8800B0CBFA /* libjscre.a */,
+				22A7811518A3A767000D9449 /* libdart_builtin.a */,
+				22A7811618A3A767000D9449 /* libdart_lib_withcore.a */,
+				22A7811718A3A767000D9449 /* libdart_vm.a */,
+				22A7811818A3A767000D9449 /* libdart_withcore.a */,
+				22A7811918A3A767000D9449 /* libdouble_conversion.a */,
+				22A7811A18A3A767000D9449 /* libjscre.a */,
 			);
 			path = debug;
 			sourceTree = "<group>";
 		};
-		2C913424186D3C8800B0CBFA /* release */ = {
+		22A7811B18A3A767000D9449 /* release */ = {
 			isa = PBXGroup;
 			children = (
-				2C913425186D3C8800B0CBFA /* libdart_builtin.a */,
-				2C913426186D3C8800B0CBFA /* libdart_lib_withcore.a */,
-				2C913427186D3C8800B0CBFA /* libdart_vm.a */,
-				2C913428186D3C8800B0CBFA /* libdart_withcore.a */,
-				2C913429186D3C8800B0CBFA /* libdouble_conversion.a */,
-				2C91342A186D3C8800B0CBFA /* libjscre.a */,
+				22A7811C18A3A767000D9449 /* libdart_builtin.a */,
+				22A7811D18A3A767000D9449 /* libdart_lib_withcore.a */,
+				22A7811E18A3A767000D9449 /* libdart_vm.a */,
+				22A7811F18A3A767000D9449 /* libdart_withcore.a */,
+				22A7812018A3A767000D9449 /* libdouble_conversion.a */,
+				22A7812118A3A767000D9449 /* libjscre.a */,
 			);
 			path = release;
 			sourceTree = "<group>";
 		};
-		2C913478186F314E00B0CBFA /* Products */ = {
+		22A7812218A3A767000D9449 /* vs */ = {
 			isa = PBXGroup;
 			children = (
-				2C91347C186F314E00B0CBFA /* openFrameworksDebug.a */,
+				22A7812318A3A767000D9449 /* x64 */,
+				22A7813018A3A767000D9449 /* x86 */,
 			);
-			name = Products;
+			path = vs;
 			sourceTree = "<group>";
 		};
-		2CB202DC186C58A300A5386D /* ofxFieldKitDart */ = {
+		22A7812318A3A767000D9449 /* x64 */ = {
 			isa = PBXGroup;
 			children = (
-				2C913415186D3C8800B0CBFA /* dart-runtime */,
-				2CB202E5186C592700A5386D /* src */,
+				22A7812418A3A767000D9449 /* libdart_builtin.lib */,
+				22A7812518A3A767000D9449 /* libdart_builtin_d.lib */,
+				22A7812618A3A767000D9449 /* libdart_lib_withcore.lib */,
+				22A7812718A3A767000D9449 /* libdart_lib_withcore_d.lib */,
+				22A7812818A3A767000D9449 /* libdart_vm.lib */,
+				22A7812918A3A767000D9449 /* libdart_vm_d.lib */,
+				22A7812A18A3A767000D9449 /* libdart_withcore.lib */,
+				22A7812B18A3A767000D9449 /* libdart_withcore_d.lib */,
+				22A7812C18A3A767000D9449 /* libdouble_conversion.lib */,
+				22A7812D18A3A767000D9449 /* libdouble_conversion_d.lib */,
+				22A7812E18A3A767000D9449 /* libjscre.lib */,
+				22A7812F18A3A767000D9449 /* libjscre_d.lib */,
 			);
-			name = ofxFieldKitDart;
-			path = ../..;
+			path = x64;
 			sourceTree = "<group>";
 		};
-		2CB202E5186C592700A5386D /* src */ = {
+		22A7813018A3A767000D9449 /* x86 */ = {
 			isa = PBXGroup;
 			children = (
-				2C91343A186D9D0100B0CBFA /* DartVM.cpp */,
-				2C91343B186D9D0100B0CBFA /* DartVM.h */,
-				2C91343D186D9D0E00B0CBFA /* Isolate.cpp */,
-				2C91343E186D9D0E00B0CBFA /* Isolate.h */,
-				2C913440186D9D1800B0CBFA /* Library.cpp */,
-				2C913441186D9D1800B0CBFA /* Library.h */,
-				2C913443186DA1FD00B0CBFA /* utilities.h */,
-				2C913444186DB23700B0CBFA /* utilities.cpp */,
-				2C913468186E90B800B0CBFA /* CoreLibrary.cpp */,
-				2C913469186E90B800B0CBFA /* CoreLibrary.h */,
+				22A7813118A3A767000D9449 /* libdart_builtin.lib */,
+				22A7813218A3A767000D9449 /* libdart_builtin_d.lib */,
+				22A7813318A3A767000D9449 /* libdart_lib_withcore.lib */,
+				22A7813418A3A767000D9449 /* libdart_lib_withcore_d.lib */,
+				22A7813518A3A767000D9449 /* libdart_vm.lib */,
+				22A7813618A3A767000D9449 /* libdart_vm_d.lib */,
+				22A7813718A3A767000D9449 /* libdart_withcore.lib */,
+				22A7813818A3A767000D9449 /* libdart_withcore_d.lib */,
+				22A7813918A3A767000D9449 /* libdouble_conversion.lib */,
+				22A7813A18A3A767000D9449 /* libdouble_conversion_d.lib */,
+				22A7813B18A3A767000D9449 /* libjscre.lib */,
+				22A7813C18A3A767000D9449 /* libjscre_d.lib */,
 			);
-			path = src;
+			path = x86;
 			sourceTree = "<group>";
 		};
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
-				2CB202DC186C58A300A5386D /* ofxFieldKitDart */,
+				22A7810218A3A767000D9449 /* ofxFieldKitDart */,
 			);
 			name = addons;
 			sourceTree = "<group>";
@@ -306,6 +422,14 @@
 			name = "3rd party frameworks";
 			sourceTree = "<group>";
 		};
+		E4328144138ABC890047C5CB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E4328148138ABC890047C5CB /* openFrameworksDebug.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		E45BE5980E8CC70C009D7055 /* frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -324,7 +448,7 @@
 				E4EEC9E9138DF44700A80321 /* openFrameworks */,
 				BB4B014C10F69532006C3DED /* addons */,
 				E45BE5980E8CC70C009D7055 /* frameworks */,
-				E4B69B5B0A3A1756003C02F2 /* simple_dartDebug.app */,
+				E4B69B5B0A3A1756003C02F2 /* example-simple_dartDebug.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -334,7 +458,6 @@
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
-				2CB202FF186C79C600A5386D /* main.dart */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -346,30 +469,28 @@
 				E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */,
 			);
 			name = openFrameworks;
-			path = ../../../../libs/openFrameworksCompiled;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E4B69B5A0A3A1756003C02F2 /* simple_dart */ = {
+		E4B69B5A0A3A1756003C02F2 /* example-simple_dart */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E4B69B5F0A3A1757003C02F2 /* Build configuration list for PBXNativeTarget "simple_dart" */;
+			buildConfigurationList = E4B69B5F0A3A1757003C02F2 /* Build configuration list for PBXNativeTarget "example-simple_dart" */;
 			buildPhases = (
 				E4B69B580A3A1756003C02F2 /* Sources */,
 				E4B69B590A3A1756003C02F2 /* Frameworks */,
 				E4B6FFFD0C3F9AB9008CF71C /* ShellScript */,
 				E4C2427710CC5ABF004149E2 /* CopyFiles */,
-				2CB20308186C7DFE00A5386D /* Copy Files */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				2C4829E6186FB37200046B3C /* PBXTargetDependency */,
+				E4EEB9AC138B136A00A80321 /* PBXTargetDependency */,
 			);
-			name = simple_dart;
+			name = "example-simple_dart";
 			productName = myOFApp;
-			productReference = E4B69B5B0A3A1756003C02F2 /* simple_dartDebug.app */;
+			productReference = E4B69B5B0A3A1756003C02F2 /* example-simple_dartDebug.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -380,7 +501,7 @@
 			attributes = {
 				LastUpgradeCheck = 0460;
 			};
-			buildConfigurationList = E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "simple_dart" */;
+			buildConfigurationList = E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "example-simple_dart" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -395,23 +516,23 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 2C913478186F314E00B0CBFA /* Products */;
+					ProductGroup = E4328144138ABC890047C5CB /* Products */;
 					ProjectRef = E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */;
 				},
 			);
 			projectRoot = "";
 			targets = (
-				E4B69B5A0A3A1756003C02F2 /* simple_dart */,
+				E4B69B5A0A3A1756003C02F2 /* example-simple_dart */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		2C91347C186F314E00B0CBFA /* openFrameworksDebug.a */ = {
+		E4328148138ABC890047C5CB /* openFrameworksDebug.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = openFrameworksDebug.a;
-			remoteRef = 2C91347B186F314E00B0CBFA /* PBXContainerItemProxy */;
+			remoteRef = E4328147138ABC890047C5CB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -428,7 +549,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cp -f ../../../../libs/fmodex/lib/osx/libfmodex.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/libfmodex.dylib\"; install_name_tool -change ./libfmodex.dylib @executable_path/libfmodex.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME\";\nmkdir -p \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources/\"\ncp -f \"$ICON_FILE\" \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources/\"\n";
+			shellScript = "cp -f ../../../libs/fmodex/lib/osx/libfmodex.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/libfmodex.dylib\"; install_name_tool -change ./libfmodex.dylib @executable_path/libfmodex.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME\";\nmkdir -p \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources/\"\ncp -f \"$ICON_FILE\" \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources/\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -438,22 +559,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
+				22A7814118A3A767000D9449 /* Library.cpp in Sources */,
+				22A7813F18A3A767000D9449 /* DartVM.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
-				2C91346A186E90B800B0CBFA /* CoreLibrary.cpp in Sources */,
-				2C913445186DB23700B0CBFA /* utilities.cpp in Sources */,
-				2C913442186D9D1800B0CBFA /* Library.cpp in Sources */,
-				2C91343C186D9D0100B0CBFA /* DartVM.cpp in Sources */,
-				2C91343F186D9D0E00B0CBFA /* Isolate.cpp in Sources */,
+				22A7813E18A3A767000D9449 /* CoreLibrary.cpp in Sources */,
+				22A7814218A3A767000D9449 /* utilities.cpp in Sources */,
+				22A7814018A3A767000D9449 /* Isolate.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		2C4829E6186FB37200046B3C /* PBXTargetDependency */ = {
+		E4EEB9AC138B136A00A80321 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = openFrameworks;
-			targetProxy = 2C4829E5186FB37200046B3C /* PBXContainerItemProxy */;
+			targetProxy = E4EEB9AB138B136A00A80321 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -462,7 +583,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E4EB6923138AFD0F00A09F29 /* Project.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(NATIVE_ARCH)";
 				CONFIGURATION_BUILD_DIR = "$(SRCROOT)/bin/";
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
@@ -478,6 +599,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(OF_CORE_HEADERS)",
+					src,
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_CPLUSPLUSFLAGS = (
 					"-D__MACOSX_CORE__",
@@ -492,7 +617,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E4EB6923138AFD0F00A09F29 /* Project.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(NATIVE_ARCH)";
 				CONFIGURATION_BUILD_DIR = "$(SRCROOT)/bin/";
 				COPY_PHASE_STRIP = YES;
 				DEAD_CODE_STRIPPING = YES;
@@ -509,6 +634,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(OF_CORE_HEADERS)",
+					src,
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_CPLUSPLUSFLAGS = (
 					"-D__MACOSX_CORE__",
@@ -522,14 +651,14 @@
 		E4B69B600A3A1757003C02F2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
 				);
-				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(OF_PATH)/libs/glut/lib/osx\"";
+				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../../libs/glut/lib/osx\"";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_MODEL_TUNING = NONE;
@@ -600,9 +729,12 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_50)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_52)",
-					"../../../../addons/ofxFieldKitDart/dart-runtime/lib/osx/debug",
+					"/Developer/dev/field/addons/ofxFieldKitDart/libs/dart-runtime/lib/osx/debug",
+					"/Developer/dev/field/addons/ofxFieldKitDart/libs/dart-runtime/lib/osx/release",
+					"/Developer/dev/field/addons/ofxFieldKitDart/libs/dart-runtime/lib/vs/x64",
+					"/Developer/dev/field/addons/ofxFieldKitDart/libs/dart-runtime/lib/vs/x86",
 				);
-				PRODUCT_NAME = simple_dartDebug;
+				PRODUCT_NAME = "$(TARGET_NAME)Debug";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -610,14 +742,14 @@
 		E4B69B610A3A1757003C02F2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
 				);
-				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(OF_PATH)/libs/glut/lib/osx\"";
+				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../../libs/glut/lib/osx\"";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_MODEL_TUNING = NONE;
 				ICON = "$(ICON_NAME_RELEASE)";
@@ -687,9 +819,9 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_49)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_50)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
-					"../../../../addons/ofxFieldKitDart/dart-runtime/lib/osx/release",
+					"/Developer/dev/field/addons/ofxFieldKitDart/libs/dart-runtime/lib/osx/release",
 				);
-				PRODUCT_NAME = simple_dart;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -697,7 +829,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "simple_dart" */ = {
+		E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "example-simple_dart" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E4B69B4E0A3A1720003C02F2 /* Debug */,
@@ -706,7 +838,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E4B69B5F0A3A1757003C02F2 /* Build configuration list for PBXNativeTarget "simple_dart" */ = {
+		E4B69B5F0A3A1757003C02F2 /* Build configuration list for PBXNativeTarget "example-simple_dart" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E4B69B600A3A1757003C02F2 /* Debug */,
