@@ -26,30 +26,44 @@ using namespace std;
 namespace fieldkit { namespace dart {
     
     
-    DartVM::DartVM( std::string snapshotFilePath )
+	// -----------------------------------------------------------------------------
+	
+    DartVM::DartVM( std::string snapshotFilePath_ )
     {
-		if ( !ofFile::doesFileExist( snapshotFilePath ) )
+		string snapshotFilePath = snapshotFilePath_;
+
+		if (!ofFilePath::isAbsolute(snapshotFilePath)){
+			snapshotFilePath = ofToDataPath(snapshotFilePath);
+		}
+		
+		if ( ofFile::doesFileExist( snapshotFilePath ) )
 		{
+			LoadSnapshot( snapshotFilePath );
+		} else {
+			
+			// TODO: what do we do if we don't have a snapshot?
+			
 			ofLogFatalError( "DartVM cannot find snapshot file!" );
-			// exit( -1 );
+			ofExit();
 		}
 
-        LoadSnapshot( snapshotFilePath );
+        
         
         add(new CoreLibrary());
     }
 
-
+	// -----------------------------------------------------------------------------
+	
     DartVM::~DartVM()
     {
-        assert(libraries_.size() > 0);
         while(!libraries_.empty()) {
             delete libraries_.back();
             libraries_.pop_back();
         }
     }
     
-    
+    // -----------------------------------------------------------------------------
+	
     #pragma mark ---- Isolate Creation ----
     Dart_Handle LibraryTagHandler(Dart_LibraryTag tag,
                                   Dart_Handle library,
@@ -83,7 +97,8 @@ namespace fieldkit { namespace dart {
 //        }
 
     }
-
+	
+	// -----------------------------------------------------------------------------
     
     Dart_Handle ResolveScript(const char* script, Dart_Handle core_library) 
 	{
@@ -100,6 +115,8 @@ namespace fieldkit { namespace dart {
         
         return ret;
     }
+	
+	// -----------------------------------------------------------------------------
     
     Dart_Handle FilePathFromUri(Dart_Handle script, Dart_Handle core_library) {
         Dart_Handle args[2] = {
@@ -109,40 +126,44 @@ namespace fieldkit { namespace dart {
         return Dart_Invoke(core_library, NewString("_filePathFromUri"), 2, args);
     }
     
-    Dart_Handle ReadSource(Dart_Handle script, Dart_Handle core_library) {
-        Dart_Handle script_path = FilePathFromUri(script, core_library);
-        if (Dart_IsError(script_path))
-            return script_path;
-        
-        const char* script_path_str;
-        Dart_StringToCString(script_path, &script_path_str);
-        
-        FILE* file = fopen(script_path_str, "r");
-        if (file == NULL)
-            LOG_W("Unable to read file " << script_path_str);
-//            return Dart_NewApiError("Unable to read file '%s'", script_path_str);
-        
-        fseek(file, 0, SEEK_END);
-        long length = ftell(file);
-        fseek(file, 0, SEEK_SET);
-        
-        char* buffer = new char[length + 1];
-        size_t read = fread(buffer, 1, length, file);
-        fclose(file);
-        buffer[read] = '\0';
-        
-        Dart_Handle source = NewString(buffer);
-        delete[] buffer;
-        return source;
-    }
+	// -----------------------------------------------------------------------------
+	
+//    Dart_Handle ReadSource(Dart_Handle script, Dart_Handle core_library) {
+//        Dart_Handle script_path = FilePathFromUri(script, core_library);
+//        if (Dart_IsError(script_path))
+//            return script_path;
+//        
+//        const char* script_path_str;
+//        Dart_StringToCString(script_path, &script_path_str);
+//        
+//        FILE* file = fopen(script_path_str, "r");
+//        if (file == NULL)
+//            LOG_W("Unable to read file " << script_path_str);
+////            return Dart_NewApiError("Unable to read file '%s'", script_path_str);
+//        
+//        fseek(file, 0, SEEK_END);
+//        long length = ftell(file);
+//        fseek(file, 0, SEEK_SET);
+//        
+//        char* buffer = new char[length + 1];
+//        size_t read = fread(buffer, 1, length, file);
+//        fclose(file);
+//        buffer[read] = '\0';
+//        
+//        Dart_Handle source = NewString(buffer);
+//        delete[] buffer;
+//        return source;
+//    }
     
-    // Temporary fix until we get the internal libraries to load
+	// -----------------------------------------------------------------------------
+	
     Dart_Handle ReadSourceFixed(Dart_Handle script, Dart_Handle core_library) {
         Dart_Handle scriptPath = script;
-        Dart_Handle source = fieldkit::dart::NewString(ReadFileContents(GetString(scriptPath)).c_str());
+        Dart_Handle source = fieldkit::dart::NewString(ofBufferFromFile(GetString(scriptPath),true).getBinaryBuffer());
         return source;
     }
 
+	// -----------------------------------------------------------------------------
     
     Dart_Handle LoadScript(const char* script,
                            bool resolve,
@@ -166,14 +187,13 @@ namespace fieldkit { namespace dart {
         return Dart_LoadScript(resolved_script, source, 0, 0);
     }
     
-    
+    // -----------------------------------------------------------------------------
+	
     Isolate* CreateIsolate(const std::string scriptFile, const char* main, bool resolve,
-                           void* data, char** error)
+                           DartVM* dartVm, char** error)
     {
         
-        DartVM* dartVm = reinterpret_cast<DartVM*>(data);
-        
-		uint8_t* snapshotBuffer;
+		uint8_t* snapshotBuffer = NULL;
 		
 		// on windows there is a problem with the snapshot
 		// Dart_CreateIsolate abort() because the snapshot is not a kFull
@@ -250,7 +270,8 @@ namespace fieldkit { namespace dart {
         return new Isolate(isolate, library);
     }
     
-    
+    // -----------------------------------------------------------------------------
+	
     #pragma mark ---- Initialisation ----
     Dart_Isolate IsolateCreateCb(const char* script_uri,
                          const char* main,
@@ -265,28 +286,37 @@ namespace fieldkit { namespace dart {
         return isolate->getIsolate();
     }
     
+	// -----------------------------------------------------------------------------
+	
     bool InterruptIsolateCb()
     {
         return true;
     }
     
+	// -----------------------------------------------------------------------------
+	
     void UnhandledExceptionCb(Dart_Handle error)
     {
         LOG_E("UnhandledException " << Dart_GetError(error));
     }
     
+	// -----------------------------------------------------------------------------
+	
     void ShutdownIsolateCb(void *callbackData)
     {
     }
     
-    // file callbacks have been copied verbatum from included sample... plus verbose logging. don't event know yet if we need them
+	// -----------------------------------------------------------------------------
+	
+    // file callbacks have been copied verbatim from included sample... plus verbose logging. don't event know yet if we need them
     void* OpenFileCb(const char* name, bool write)
     {
         //	LOG_V( "name: " << name << ", write mode: " << boolalpha << write << dec );
         return fopen(name, write ? "w" : "r");
     }
     
-    
+    // -----------------------------------------------------------------------------
+	
     void ReadFileCb(const uint8_t** data, intptr_t* fileLength, void* stream )
     {
         if (!stream) {
@@ -306,24 +336,30 @@ namespace fieldkit { namespace dart {
         }
     }
     
+	// -----------------------------------------------------------------------------
     
     static void WriteFileCb(const void* data, intptr_t length, void* file)
     {
         fwrite(data, 1, length, reinterpret_cast<FILE*>(file));
     }
     
-    
+
+	// -----------------------------------------------------------------------------
+	
     static void CloseFileCb(void* file)
     {
         fclose(reinterpret_cast<FILE*>(file));
     }
     
+	// -----------------------------------------------------------------------------
     
-    static bool EntropySourceCb(uint8_t* buffer, intptr_t length)
+	static bool EntropySourceCb(uint8_t* buffer, intptr_t length)
     {
         return true;
     }
     
+	// -----------------------------------------------------------------------------
+	
     void DartVM::Init(const bool checkedMode)
     {
         // setting VM startup options
@@ -350,14 +386,16 @@ namespace fieldkit { namespace dart {
             library->Init();
     }
     
-    
+	// -----------------------------------------------------------------------------
+	
     void DartVM::LoadSnapshot(const std::string file)
     {
         LOG_I("Loading Snapshot " << file);
         // TODO should error if snapshot is empty
-        snapshotBuffer_ = (uint8_t*) ReadFileContents(file).c_str();
+        mSnapshotBuffer = ofBufferFromFile(file,true);
     }
     
+	// -----------------------------------------------------------------------------
     
     #pragma mark ---- LoadScript ----
     Isolate* DartVM::LoadScript(const std::string scriptFile)
@@ -369,12 +407,19 @@ namespace fieldkit { namespace dart {
         return isolate;
     }
 
+	// -----------------------------------------------------------------------------
+	
     #pragma mark ---- Accessors ----
     void DartVM::add(Library* library)
     {
         libraries_.push_back(library);
     }
     
-    std::string DartVM::getVersion() { return Dart_VersionString(); }
+	// -----------------------------------------------------------------------------
+	
+    std::string DartVM::getVersion()
+	{
+		return Dart_VersionString();
+	}
 
 } }  // namespace fieldkit::dart

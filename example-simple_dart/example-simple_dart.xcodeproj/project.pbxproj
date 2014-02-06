@@ -730,9 +730,6 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_52)",
 					"/Developer/dev/field/addons/ofxFieldKitDart/libs/dart-runtime/lib/osx/debug",
-					"/Developer/dev/field/addons/ofxFieldKitDart/libs/dart-runtime/lib/osx/release",
-					"/Developer/dev/field/addons/ofxFieldKitDart/libs/dart-runtime/lib/vs/x64",
-					"/Developer/dev/field/addons/ofxFieldKitDart/libs/dart-runtime/lib/vs/x86",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)Debug";
 				WRAPPER_EXTENSION = app;

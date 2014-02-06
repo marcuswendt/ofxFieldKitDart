@@ -31,10 +31,6 @@ namespace fieldkit { namespace dart {
     #define LOG_W(MSG) LOG("WARNING", MSG)
 
     
-    // Files
-    std::string ReadFileContents(std::string const& path);
-    
-    
     // Dart API Utilities    
 //#define EXPECT_VALID(handle)                                                         \
 //    do {                                                                             \

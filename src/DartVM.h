@@ -7,31 +7,32 @@
  *   Created by Marcus Wendt on 27/12/2013.
  */
 
-
 #pragma once
 
-#include <string>
-#include <vector>
-#include <stdint.h>
-#include <memory>
+#include "ofMain.h"
 
 namespace fieldkit { namespace dart {
     
     class Isolate;
     class Library;
-    
-    class DartVM;
-	typedef std::shared_ptr<DartVM> DartVMRef;
-
+	
     class DartVM {
-
+		
+	private:
+		
+		/// disables direct instantiation
+		DartVM(){};
+		
     public:
 
-        static DartVMRef create( std::string snapshotFilePath )
-		{
-			return DartVMRef( new DartVM( snapshotFilePath) );
-		}
+		explicit DartVM( std::string snapshotFilePath_ );
 
+		static shared_ptr<DartVM> create( std::string snapshotFilePath ) {
+			shared_ptr<DartVM> dartVM;
+			dartVM = shared_ptr<DartVM> (new DartVM(snapshotFilePath));
+			return dartVM;
+		};
+		
         ~DartVM();
         
         //! prepares the dart virtual machine
@@ -40,26 +41,22 @@ namespace fieldkit { namespace dart {
         void LoadSnapshot(const std::string file);
         
         //! load, parse and compile a script, returns a script isolate
+		/// TODO: who owns the Isolate?
         Isolate* LoadScript(const std::string scriptFile);
         
         void add(Library* library);
         
         // Accessors
         std::string getVersion();
-        uint8_t* getSnapshot() { return snapshotBuffer_; }
+        uint8_t* getSnapshot() const { return (uint8_t*)mSnapshotBuffer.getBinaryBuffer(); }
         std::vector<Library*> getLibraries() { return libraries_; }
         
-//        std::string getLibraryScript() { return libraryScript_; }
-
-	protected:
+		//        std::string getLibraryScript() { return libraryScript_; }
 		
-		DartVM( std::string snapshotFilePath );
-
-
     private:
-        uint8_t* snapshotBuffer_;
+        ofBuffer mSnapshotBuffer;
         std::vector<Library*> libraries_;
-//        std::string libraryScript_;
+		//        std::string libraryScript_;
     };
     
 } } // namespace fieldkit::dart
