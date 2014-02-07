@@ -66,17 +66,37 @@ FieldKit.cpp/ ScriptKit an earlier solution of mine integrating v8 into Cinder/ 
 https://github.com/field/FieldKit.cpp
 
 
+## (tig) Building dart for openFrameworks / VS2012
+
+Note that we're using dart 1.0 for now, until the API stabilises.
+
+* install depot-tools
+
+* then, in the depot-tools folder, using cmd.exe:
+
+	mkdir dart-repo
+	
+	cd dart-repo
+
+	gclient config https://dart.googlecode.com/svn/branches/1.0/deps/standalone.deps
+
+	git svn clone https://dart.googlecode.com/svn/branches/1.0/dart dart
+
+	gclient sync -n && gclient runhooks
+
+* there should be a vs solution in runtime now
+* then copy cygwin from depot-tools to runtime/../third-party/cygwin
+* open dart.sln with visual studio 
+* switch all relevant targets to c/c++ > Code Generation > Runtime Library > Multi-threaded Debug DLL (/MDd) [debug] , Multi-threaded DLL (/MD) [release]
+* compile vs2012
+
 ## License
 
 Released under the BSD license. Full details in the included LICENSE.txt file.
 
 Copyright (c) 2013 Marcus Wendt <marcus@field.io>
 
+With additions & fixes 
 
+Copyright (c) 2014 tgfrerer <tim@poniesandlight.co.uk>
 
-## TODO
-
-* built-in libraries as modules, especially dart:io
-* replace LOG_E with Dart_NewApiError etc.
-* More spectacular samples ;-)
-* Snapshots don't work on Windows, Dart_CreateIsolate() quit the app because the snapshot is not kFull. To fix this the snapshot is set ```NULL``` on windows. DartVM.cpp\(\#178\)

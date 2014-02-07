@@ -7,7 +7,7 @@ using namespace fieldkit;
 void ofApp::setup()
 {
 	//dartVM = fieldkit::dart::DartVM::create("snapshots/full.snapshot");
-	dartVM = fieldkit::dart::DartVM::create("");
+	dartVM = fieldkit::dart::DartVM::create("snapshots/dart.1.0.core.snapshot");
 
 	dartVM->Init(true);
 

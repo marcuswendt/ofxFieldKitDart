@@ -65,7 +65,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
-      <AdditionalDependencies>%(AdditionalDependencies);libdart_builtin_d.lib;libdart_lib_withcore_d.lib;libdart_vm_d.lib;libdart_withcore_d.lib;libdouble_conversion_d.lib;libjscre_d.lib</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies);libdart_builtin.lib;libdart_lib_withcore.lib;libdart_vm.lib;libdart_withcore.lib;libdouble_conversion.lib;libjscre.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);..\..\..\addons\ofxFieldKitDart\libs\dart-runtime\lib\vs\x86\debug</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>

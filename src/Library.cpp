@@ -19,7 +19,7 @@
 namespace fieldkit { namespace dart {
     
     
-    Dart_NativeFunction LibraryResolver(Dart_Handle name, int argc, bool* auto_setup_scope = false)
+    Dart_NativeFunction LibraryResolver(Dart_Handle name, int argc)
     {
         const char* native_function_name = 0;
         Dart_StringToCString(name, &native_function_name);
@@ -54,7 +54,8 @@ namespace fieldkit { namespace dart {
             return library;
         }
         
-        Dart_SetNativeResolver(library, LibraryResolver);
+        //Dart_SetNativeResolver(library, LibraryResolver);
+		Dart_SetNativeResolver(library,LibraryResolver);
         
         if (initializer_ != NULL)
             initializer_(library);
