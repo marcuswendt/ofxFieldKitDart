@@ -31,7 +31,8 @@ namespace fieldkit { namespace dart {
     DartVM::DartVM( std::string snapshotFilePath_ )
     {
 		string snapshotFilePath = snapshotFilePath_;
-
+		// relative paths are believed relative to current data path,
+		// absolute paths are left untouched.
 		if (!ofFilePath::isAbsolute(snapshotFilePath)){
 			snapshotFilePath = ofToDataPath(snapshotFilePath);
 		}
@@ -40,15 +41,8 @@ namespace fieldkit { namespace dart {
 		{
 			LoadSnapshot( snapshotFilePath );
 		} else {
-			
-			// TODO: what do we do if we don't have a snapshot?
-			
-			ofLogFatalError( "DartVM cannot find snapshot file!" );
-			ofExit();
+			ofLogError("DartVM cannot find snapshot file!");
 		}
-
-        
-        
         add(new CoreLibrary());
     }
 
@@ -69,33 +63,8 @@ namespace fieldkit { namespace dart {
                                   Dart_Handle library,
                                   Dart_Handle url)
     {
-//        const char* url_str = NULL;
-//        Dart_Handle result = Dart_StringToCString(url, &url_str);
-//        if (Dart_IsError(result))
-//            return result;
-//        assert(false);  // TODO: implement.
-        
         if(tag == Dart_kCanonicalizeUrl)
             return url;
-
-        LOG_W("shouldnt happen!");
-        
-//        std::string urlStr = GetString(url);
-//        if(urlStr == FKDART_BASE_LIBRARY) {
-//            DartVM *dartVm = static_cast<DartVM *>(Dart_CurrentIsolateData());
-//            
-//            std::string script = ReadFileContents(dartVm->getLibraryScript());
-//            Dart_Handle source = Dart_NewStringFromCString( script.c_str() );
-//            CHECK(source);
-//            
-//            Dart_Handle library = Dart_LoadLibrary(url, source);
-//            CHECK(library);
-//            
-////            CHECK(Dart_SetNativeResolver(library, ResolveName));
-//            
-//            return library;
-//        }
-
     }
 	
 	// -----------------------------------------------------------------------------
@@ -128,36 +97,7 @@ namespace fieldkit { namespace dart {
     
 	// -----------------------------------------------------------------------------
 	
-//    Dart_Handle ReadSource(Dart_Handle script, Dart_Handle core_library) {
-//        Dart_Handle script_path = FilePathFromUri(script, core_library);
-//        if (Dart_IsError(script_path))
-//            return script_path;
-//        
-//        const char* script_path_str;
-//        Dart_StringToCString(script_path, &script_path_str);
-//        
-//        FILE* file = fopen(script_path_str, "r");
-//        if (file == NULL)
-//            LOG_W("Unable to read file " << script_path_str);
-////            return Dart_NewApiError("Unable to read file '%s'", script_path_str);
-//        
-//        fseek(file, 0, SEEK_END);
-//        long length = ftell(file);
-//        fseek(file, 0, SEEK_SET);
-//        
-//        char* buffer = new char[length + 1];
-//        size_t read = fread(buffer, 1, length, file);
-//        fclose(file);
-//        buffer[read] = '\0';
-//        
-//        Dart_Handle source = NewString(buffer);
-//        delete[] buffer;
-//        return source;
-//    }
-    
-	// -----------------------------------------------------------------------------
-	
-    Dart_Handle ReadSourceFixed(Dart_Handle script, Dart_Handle core_library) {
+    Dart_Handle ReadSource(Dart_Handle script, Dart_Handle core_library) {
         Dart_Handle scriptPath = script;
         Dart_Handle source = fieldkit::dart::NewString(ofBufferFromFile(GetString(scriptPath),true).getBinaryBuffer());
         return source;
@@ -180,7 +120,7 @@ namespace fieldkit { namespace dart {
         }
         
 //        Dart_Handle source = ReadSource(resolved_script, core_library);
-        Dart_Handle source = ReadSourceFixed(resolved_script, core_library);
+        Dart_Handle source = ReadSource(resolved_script, core_library);
         if (Dart_IsError(source))
             return source;
         
@@ -204,7 +144,7 @@ namespace fieldkit { namespace dart {
                                                   error);
         
 		if (isolate==NULL) {
-			ofLogError() << "Trouble creating Isolate" << error;
+			ofLogError() << "Dart error : " << *error;
 				return NULL;
 		} else {
 			ofLogNotice() << "Successfully created Isolate";

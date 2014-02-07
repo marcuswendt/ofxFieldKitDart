@@ -1,4 +1,5 @@
- 
+import 'dart:isolate';
+
 class Sketch {
 	Sketch() {
 		print("created Sketch");
