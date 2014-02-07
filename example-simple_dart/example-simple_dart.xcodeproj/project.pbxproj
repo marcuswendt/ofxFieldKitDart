@@ -12,42 +12,12 @@
 		22A7814018A3A767000D9449 /* Isolate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22A7810818A3A767000D9449 /* Isolate.cpp */; };
 		22A7814118A3A767000D9449 /* Library.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22A7810A18A3A767000D9449 /* Library.cpp */; };
 		22A7814218A3A767000D9449 /* utilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22A7810C18A3A767000D9449 /* utilities.cpp */; };
-		22A7814318A3A767000D9449 /* libdart_builtin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7811518A3A767000D9449 /* libdart_builtin.a */; };
-		22A7814418A3A768000D9449 /* libdart_lib_withcore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7811618A3A767000D9449 /* libdart_lib_withcore.a */; };
-		22A7814518A3A768000D9449 /* libdart_vm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7811718A3A767000D9449 /* libdart_vm.a */; };
-		22A7814618A3A768000D9449 /* libdart_withcore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7811818A3A767000D9449 /* libdart_withcore.a */; };
-		22A7814718A3A768000D9449 /* libdouble_conversion.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7811918A3A767000D9449 /* libdouble_conversion.a */; };
-		22A7814818A3A768000D9449 /* libjscre.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7811A18A3A767000D9449 /* libjscre.a */; };
-		22A7814918A3A768000D9449 /* libdart_builtin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7811C18A3A767000D9449 /* libdart_builtin.a */; };
-		22A7814A18A3A768000D9449 /* libdart_lib_withcore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7811D18A3A767000D9449 /* libdart_lib_withcore.a */; };
-		22A7814B18A3A768000D9449 /* libdart_vm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7811E18A3A767000D9449 /* libdart_vm.a */; };
-		22A7814C18A3A768000D9449 /* libdart_withcore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7811F18A3A767000D9449 /* libdart_withcore.a */; };
-		22A7814D18A3A768000D9449 /* libdouble_conversion.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7812018A3A767000D9449 /* libdouble_conversion.a */; };
-		22A7814E18A3A768000D9449 /* libjscre.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7812118A3A767000D9449 /* libjscre.a */; };
-		22A7814F18A3A768000D9449 /* libdart_builtin.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7812418A3A767000D9449 /* libdart_builtin.lib */; };
-		22A7815018A3A768000D9449 /* libdart_builtin_d.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7812518A3A767000D9449 /* libdart_builtin_d.lib */; };
-		22A7815118A3A768000D9449 /* libdart_lib_withcore.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7812618A3A767000D9449 /* libdart_lib_withcore.lib */; };
-		22A7815218A3A768000D9449 /* libdart_lib_withcore_d.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7812718A3A767000D9449 /* libdart_lib_withcore_d.lib */; };
-		22A7815318A3A768000D9449 /* libdart_vm.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7812818A3A767000D9449 /* libdart_vm.lib */; };
-		22A7815418A3A768000D9449 /* libdart_vm_d.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7812918A3A767000D9449 /* libdart_vm_d.lib */; };
-		22A7815518A3A768000D9449 /* libdart_withcore.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7812A18A3A767000D9449 /* libdart_withcore.lib */; };
-		22A7815618A3A768000D9449 /* libdart_withcore_d.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7812B18A3A767000D9449 /* libdart_withcore_d.lib */; };
-		22A7815718A3A768000D9449 /* libdouble_conversion.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7812C18A3A767000D9449 /* libdouble_conversion.lib */; };
-		22A7815818A3A768000D9449 /* libdouble_conversion_d.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7812D18A3A767000D9449 /* libdouble_conversion_d.lib */; };
-		22A7815918A3A768000D9449 /* libjscre.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7812E18A3A767000D9449 /* libjscre.lib */; };
-		22A7815A18A3A768000D9449 /* libjscre_d.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7812F18A3A767000D9449 /* libjscre_d.lib */; };
-		22A7815B18A3A768000D9449 /* libdart_builtin.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7813118A3A767000D9449 /* libdart_builtin.lib */; };
-		22A7815C18A3A768000D9449 /* libdart_builtin_d.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7813218A3A767000D9449 /* libdart_builtin_d.lib */; };
-		22A7815D18A3A768000D9449 /* libdart_lib_withcore.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7813318A3A767000D9449 /* libdart_lib_withcore.lib */; };
-		22A7815E18A3A768000D9449 /* libdart_lib_withcore_d.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7813418A3A767000D9449 /* libdart_lib_withcore_d.lib */; };
-		22A7815F18A3A768000D9449 /* libdart_vm.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7813518A3A767000D9449 /* libdart_vm.lib */; };
-		22A7816018A3A768000D9449 /* libdart_vm_d.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7813618A3A767000D9449 /* libdart_vm_d.lib */; };
-		22A7816118A3A768000D9449 /* libdart_withcore.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7813718A3A767000D9449 /* libdart_withcore.lib */; };
-		22A7816218A3A768000D9449 /* libdart_withcore_d.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7813818A3A767000D9449 /* libdart_withcore_d.lib */; };
-		22A7816318A3A768000D9449 /* libdouble_conversion.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7813918A3A767000D9449 /* libdouble_conversion.lib */; };
-		22A7816418A3A768000D9449 /* libdouble_conversion_d.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7813A18A3A767000D9449 /* libdouble_conversion_d.lib */; };
-		22A7816518A3A768000D9449 /* libjscre.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7813B18A3A767000D9449 /* libjscre.lib */; };
-		22A7816618A3A768000D9449 /* libjscre_d.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7813C18A3A767000D9449 /* libjscre_d.lib */; };
+		22A7816D18A3F09D000D9449 /* libdart_builtin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7811518A3A767000D9449 /* libdart_builtin.a */; };
+		22A7816E18A3F09D000D9449 /* libdart_lib_withcore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7811618A3A767000D9449 /* libdart_lib_withcore.a */; };
+		22A7816F18A3F09D000D9449 /* libdart_vm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7811718A3A767000D9449 /* libdart_vm.a */; };
+		22A7817018A3F09D000D9449 /* libdart_withcore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7811818A3A767000D9449 /* libdart_withcore.a */; };
+		22A7817118A3F09D000D9449 /* libdouble_conversion.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7811918A3A767000D9449 /* libdouble_conversion.a */; };
+		22A7817218A3F09D000D9449 /* libjscre.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A7811A18A3A767000D9449 /* libjscre.a */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
@@ -180,59 +150,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22A7814D18A3A768000D9449 /* libdouble_conversion.a in Frameworks */,
-				22A7814918A3A768000D9449 /* libdart_builtin.a in Frameworks */,
 				E7F985F815E0DEA3003869B5 /* Accelerate.framework in Frameworks */,
-				22A7815418A3A768000D9449 /* libdart_vm_d.lib in Frameworks */,
 				E7E077E815D3B6510020DFD4 /* QTKit.framework in Frameworks */,
-				22A7814818A3A768000D9449 /* libjscre.a in Frameworks */,
 				E4EB6799138ADC1D00A09F29 /* GLUT.framework in Frameworks */,
-				22A7816418A3A768000D9449 /* libdouble_conversion_d.lib in Frameworks */,
-				22A7815018A3A768000D9449 /* libdart_builtin_d.lib in Frameworks */,
 				E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */,
 				E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */,
-				22A7815B18A3A768000D9449 /* libdart_builtin.lib in Frameworks */,
-				22A7815C18A3A768000D9449 /* libdart_builtin_d.lib in Frameworks */,
-				22A7815E18A3A768000D9449 /* libdart_lib_withcore_d.lib in Frameworks */,
-				22A7815318A3A768000D9449 /* libdart_vm.lib in Frameworks */,
-				22A7816318A3A768000D9449 /* libdouble_conversion.lib in Frameworks */,
-				22A7815218A3A768000D9449 /* libdart_lib_withcore_d.lib in Frameworks */,
-				22A7816118A3A768000D9449 /* libdart_withcore.lib in Frameworks */,
 				E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */,
-				22A7816518A3A768000D9449 /* libjscre.lib in Frameworks */,
-				22A7815818A3A768000D9449 /* libdouble_conversion_d.lib in Frameworks */,
 				E45BE97D0E8CC7DD009D7055 /* AudioToolbox.framework in Frameworks */,
 				E45BE97E0E8CC7DD009D7055 /* Carbon.framework in Frameworks */,
-				22A7814C18A3A768000D9449 /* libdart_withcore.a in Frameworks */,
-				22A7816618A3A768000D9449 /* libjscre_d.lib in Frameworks */,
 				E45BE97F0E8CC7DD009D7055 /* CoreAudio.framework in Frameworks */,
 				E45BE9800E8CC7DD009D7055 /* CoreFoundation.framework in Frameworks */,
-				22A7816218A3A768000D9449 /* libdart_withcore_d.lib in Frameworks */,
 				E45BE9810E8CC7DD009D7055 /* CoreServices.framework in Frameworks */,
-				22A7814B18A3A768000D9449 /* libdart_vm.a in Frameworks */,
-				22A7814F18A3A768000D9449 /* libdart_builtin.lib in Frameworks */,
-				22A7814518A3A768000D9449 /* libdart_vm.a in Frameworks */,
-				22A7815D18A3A768000D9449 /* libdart_lib_withcore.lib in Frameworks */,
-				22A7815918A3A768000D9449 /* libjscre.lib in Frameworks */,
 				E45BE9830E8CC7DD009D7055 /* OpenGL.framework in Frameworks */,
-				22A7814318A3A767000D9449 /* libdart_builtin.a in Frameworks */,
-				22A7815618A3A768000D9449 /* libdart_withcore_d.lib in Frameworks */,
-				22A7814A18A3A768000D9449 /* libdart_lib_withcore.a in Frameworks */,
-				22A7814718A3A768000D9449 /* libdouble_conversion.a in Frameworks */,
 				E45BE9840E8CC7DD009D7055 /* QuickTime.framework in Frameworks */,
-				22A7815518A3A768000D9449 /* libdart_withcore.lib in Frameworks */,
 				E4C2424710CC5A17004149E2 /* AppKit.framework in Frameworks */,
-				22A7815118A3A768000D9449 /* libdart_lib_withcore.lib in Frameworks */,
 				E4C2424810CC5A17004149E2 /* Cocoa.framework in Frameworks */,
-				22A7816018A3A768000D9449 /* libdart_vm_d.lib in Frameworks */,
-				22A7815A18A3A768000D9449 /* libjscre_d.lib in Frameworks */,
-				22A7815F18A3A768000D9449 /* libdart_vm.lib in Frameworks */,
-				22A7814418A3A768000D9449 /* libdart_lib_withcore.a in Frameworks */,
 				E4C2424910CC5A17004149E2 /* IOKit.framework in Frameworks */,
-				22A7815718A3A768000D9449 /* libdouble_conversion.lib in Frameworks */,
-				22A7814E18A3A768000D9449 /* libjscre.a in Frameworks */,
-				22A7814618A3A768000D9449 /* libdart_withcore.a in Frameworks */,
 				E7E077E515D3B63C0020DFD4 /* CoreVideo.framework in Frameworks */,
+				22A7816D18A3F09D000D9449 /* libdart_builtin.a in Frameworks */,
+				22A7816E18A3F09D000D9449 /* libdart_lib_withcore.a in Frameworks */,
+				22A7816F18A3F09D000D9449 /* libdart_vm.a in Frameworks */,
+				22A7817018A3F09D000D9449 /* libdart_withcore.a in Frameworks */,
+				22A7817118A3F09D000D9449 /* libdouble_conversion.a in Frameworks */,
+				22A7817218A3F09D000D9449 /* libjscre.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -730,6 +670,7 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_52)",
 					"/Developer/dev/field/addons/ofxFieldKitDart/libs/dart-runtime/lib/osx/debug",
+					"/Developer/dev/field/addons/ofxFieldKitDart/libs/dart-runtime/lib/vs/x64",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)Debug";
 				WRAPPER_EXTENSION = app;
@@ -817,6 +758,8 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_50)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
 					"/Developer/dev/field/addons/ofxFieldKitDart/libs/dart-runtime/lib/osx/release",
+					"/Developer/dev/field/addons/ofxFieldKitDart/libs/dart-runtime/lib/vs/x64",
+					"/Developer/dev/field/addons/ofxFieldKitDart/libs/dart-runtime/lib/osx/debug",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
