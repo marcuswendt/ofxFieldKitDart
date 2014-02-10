@@ -54,8 +54,11 @@ namespace fieldkit { namespace dart {
 		// everytime a new instance of this method is created.
 		// and Dart_ExitScope() everytime this method gets out of scope.
 		Dart_Handle mResultHandle;
-		/// no copy
+		/// disabled default initializer
 		Invoke(){};
+		/// disabled assignment operator
+		Invoke& operator = ( const Invoke& rhs_ ){};
+
 	public:
 
 		/// brief:   calls a dart method and allows access to any result handles.
@@ -67,10 +70,10 @@ namespace fieldkit { namespace dart {
 
 		/// move constructor, makes sure to transfer ownership of the handle, and 
 		/// also makes sure the handle remains unique.
-		Invoke(const Invoke&& lhs_)
-		: mResultHandle(std::move(lhs_.mResultHandle)){
-			// make sure we have invalidated the source object handle.
-			const_cast<Dart_Handle>(lhs_.mResultHandle) = nullptr;
+		Invoke(const Invoke&& rhs_)
+			: mResultHandle(std::move(rhs_.mResultHandle)){
+				// make sure we have invalidated the source object handle.
+				const_cast<Dart_Handle>(rhs_.mResultHandle) = nullptr;
 		};
 
 
