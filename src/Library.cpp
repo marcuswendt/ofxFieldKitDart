@@ -18,7 +18,8 @@
 
 namespace fieldkit { namespace dart {
     
-    
+    // -----------------------------------------------------------------------------
+
     Dart_NativeFunction LibraryResolver(Dart_Handle name, int argc)
     {
         const char* native_function_name = 0;
@@ -26,7 +27,7 @@ namespace fieldkit { namespace dart {
      
         DartVM* dartVM = static_cast<DartVM*>(Dart_CurrentIsolateData());
         
-        for(Library* library : dartVM->getLibraries())
+        for(auto library : dartVM->getLibraries())
         {
             auto functionMap = library->getFunctions();
             auto functionIt = functionMap.find(native_function_name);
@@ -40,33 +41,35 @@ namespace fieldkit { namespace dart {
         return NULL;
     }
     
-    
+    // -----------------------------------------------------------------------------
+
     Dart_Handle Library::Load()
     {
-        Dart_Handle url = NewString(name_);
+        Dart_Handle url = NewString(mName);
         Dart_Handle library = Dart_LookupLibrary(url);
         
         if (Dart_IsError(library))
-            library = Dart_LoadLibrary(url, NewString(source_));
+            library = Dart_LoadLibrary(url, NewString(mSource));
         
         if (Dart_IsError(library)) {
-            LOG_E("Failed to load library (name: " << name_ << " source: " << source_ << ")\n Error: " << Dart_GetError(library))
+            LOG_E("Failed to load library (name: " << mName << " source: " << mSource << ")\n Error: " << Dart_GetError(library))
             return library;
         }
         
         //Dart_SetNativeResolver(library, LibraryResolver);
 		Dart_SetNativeResolver(library,LibraryResolver);
         
-        if (initializer_ != NULL)
-            initializer_(library);
+        if (mInitializer != NULL)
+            mInitializer(library);
         
         return library;
     }
     
-    
+    // -----------------------------------------------------------------------------
+
     void Library::add(const char* name, Dart_NativeFunction function)
     {
-        functions_.insert(std::make_pair(name, function));
+        mFunctions.insert(std::make_pair(name, function));
     }
     
 } } // namespace fieldkit::dart

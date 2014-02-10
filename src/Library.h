@@ -11,8 +11,7 @@
 #pragma once
 
 #include "dart_api.h"
-#include "utilities.h"
-
+#include <map>
 
 namespace fieldkit { namespace dart {
     
@@ -24,7 +23,7 @@ namespace fieldkit { namespace dart {
     class Library {
     public:
         Library()
-        : name_(NULL), source_(NULL), initializer_(NULL) {}
+        : mName(nullptr), mSource(nullptr), mInitializer(nullptr) {}
         
         virtual ~Library() {}
         
@@ -34,15 +33,15 @@ namespace fieldkit { namespace dart {
         //! called for each new Isolate
         Dart_Handle Load();
         
-        const char* getName() { return name_; }
-        NativeFunctionMap getFunctions() { return functions_; }
+        const char* getName() { return mName; }
+        const NativeFunctionMap& getFunctions() { return mFunctions; }
         
     protected:
-        const char* name_;
-        const char* source_;
+        const char* mName;
+        const char* mSource;
 
-        NativeFunctionMap functions_;
-        Dart_LibraryInitializer initializer_;
+        NativeFunctionMap mFunctions;
+        Dart_LibraryInitializer mInitializer;
 
         //! Adds a native function
         void add(const char* name, Dart_NativeFunction function);
