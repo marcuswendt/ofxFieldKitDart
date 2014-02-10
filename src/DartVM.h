@@ -49,14 +49,9 @@ namespace fieldkit { namespace dart {
 
 		// Accessors
 		std::string getVersion();
-		uint8_t* getSnapshot() const { 
-			if (mSnapshotBuffer.size() ==0 ){
-				ofLogError() << __FUNCTION__ << " : requested contents of empty snapshot.";
-				return NULL;
-			} else {
-				return (uint8_t*)mSnapshotBuffer.getBinaryBuffer(); 
-			}
-		}
+		// 
+		uint8_t* getSnapshot() const;
+
 		std::vector<Library*> getLibraries() { return libraries_; }
 
 		//        std::string getLibraryScript() { return libraryScript_; }
