@@ -16,6 +16,11 @@
 #include "Library.h"
 #include "utilities.h"
 
+/// tig to make inline code editing easier.
+#ifndef DART_LANG_SOURCE
+#define DART_LANG_SOURCE(x) #x
+#endif 
+
 
 namespace fieldkit { namespace dart {
     
@@ -39,13 +44,14 @@ namespace fieldkit { namespace dart {
         
     void CoreLibrary::Init()
     {
-        name_ = CORE_LIBRARY_NAME;
-//        source_ = ReadFileContents("../Resources/fkbase.dart").c_str();
+        mName = CORE_LIBRARY_NAME;
         
-        source_ =
-            "void exit(num code) native \"exit\";"
-            "void print(String message) native \"print\";";
-        
+		/// dart code
+        mSource = DART_LANG_SOURCE (
+            void exit(num code) native "exit";
+            void print(String message) native "print";
+		);
+
         add("exit", base_exit);
         add("print", base_print);
     }
