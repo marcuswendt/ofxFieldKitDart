@@ -22,6 +22,6 @@ public:
     void gotMessage(ofMessage msg);
     
     shared_ptr<fieldkit::dart::DartVM>	dartVM;
-    fieldkit::dart::Isolate*	script;
+    shared_ptr<fieldkit::dart::Isolate>	script;
     Dart_Handle					sketch;
 };
