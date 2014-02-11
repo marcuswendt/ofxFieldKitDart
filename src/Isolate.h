@@ -15,7 +15,6 @@
 
 namespace fieldkit { namespace dart {
 
-
 	// ff decl.
 	class Library;
 	class Invoke;
@@ -26,7 +25,8 @@ namespace fieldkit { namespace dart {
 			: isolate_(isolate),
 			library_(library) {}
 
-		~Isolate() {}
+		~Isolate() {
+		}
 
 		/// Invokes a function from the scripts library, without caring about 
 		/// return values. See this as a procedure call.
@@ -64,8 +64,8 @@ namespace fieldkit { namespace dart {
 		/// brief:   calls a dart method and allows access to any result handles.
 		/// detail:  opens a dart scope, calls the specified function_ in the script 
 		///          specified by target_ and stores a handle to the result of the invocation.
-		///          the result handle will be kept alive for as long as this object is in the 
-		///          current scope.
+		///          the result handle will be kept alive for as long as this object is held 
+		///          in the current c++ scope.
 		Invoke(Dart_Handle target_, std::string function_, int argc_ = 0, Dart_Handle* args_ = 0);
 
 		/// move constructor, makes sure to transfer ownership of the handle, and 

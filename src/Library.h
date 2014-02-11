@@ -28,10 +28,10 @@ namespace fieldkit { namespace dart {
         virtual ~Library() {}
         
         //! called once the VM is initialised
-        virtual void Init() = 0;
+        virtual void init() = 0;
         
         //! called for each new Isolate
-        Dart_Handle Load();
+        Dart_Handle load();
         
         const char* getName() { return mName; }
         const NativeFunctionMap& getFunctions() { return mFunctions; }

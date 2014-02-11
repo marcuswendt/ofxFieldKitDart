@@ -19,7 +19,7 @@ namespace fieldkit { namespace dart {
     public:
         CoreLibrary() {}
         ~CoreLibrary() {}
-        void Init();
+        void init();
     };
     
 } }

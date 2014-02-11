@@ -43,7 +43,7 @@ namespace fieldkit { namespace dart {
     
     // -----------------------------------------------------------------------------
 
-    Dart_Handle Library::Load()
+    Dart_Handle Library::load()
     {
         Dart_Handle url = NewString(mName);
         Dart_Handle library = Dart_LookupLibrary(url);
@@ -54,9 +54,10 @@ namespace fieldkit { namespace dart {
         if (Dart_IsError(library)) {
             LOG_E("Failed to load library (name: " << mName << " source: " << mSource << ")\n Error: " << Dart_GetError(library))
             return library;
-        }
+		} else {
+			ofLogNotice() << "Loaded Library: " << mName;
+		}
         
-        //Dart_SetNativeResolver(library, LibraryResolver);
 		Dart_SetNativeResolver(library,LibraryResolver);
         
         if (mInitializer != NULL)

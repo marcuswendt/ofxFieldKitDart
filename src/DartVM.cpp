@@ -39,7 +39,7 @@ namespace fieldkit { namespace dart {
 
 		if ( ofFile::doesFileExist( snapshotFilePath ) )
 		{
-			LoadSnapshot( snapshotFilePath );
+			loadSnapshot( snapshotFilePath );
 		} else {
 			ofLogError("DartVM cannot find snapshot file!");
 		}
@@ -50,10 +50,16 @@ namespace fieldkit { namespace dart {
 
 	DartVM::~DartVM()
 	{
+		Dart_ShutdownIsolate();
+
 		while(!libraries_.empty()) {
 			delete libraries_.back();
 			libraries_.pop_back();
 		}
+
+		bool result = Dart_Cleanup();
+		ofLog() << "Dart Cleanup" << (result ? " successful" : " error");
+		
 	}
 
 	// -----------------------------------------------------------------------------
@@ -118,8 +124,6 @@ namespace fieldkit { namespace dart {
 			} else {
 				resolved_script = NewString(script);
 			}
-
-			//        Dart_Handle source = ReadSource(resolved_script, core_library);
 			Dart_Handle source = ReadSource(resolved_script, core_library);
 			if (Dart_IsError(source))
 				return source;
@@ -145,7 +149,7 @@ namespace fieldkit { namespace dart {
 
 		if (isolate==NULL) {
 			ofLogError() << "Dart error : " << *error;
-			return NULL;
+			return nullptr;
 		} else {
 			ofLogNotice() << "Successfully created Isolate";
 		}
@@ -158,36 +162,35 @@ namespace fieldkit { namespace dart {
 			*error = strdup(Dart_GetError(result));
 			Dart_ExitScope();
 			Dart_ShutdownIsolate();
-			return NULL;
+			return nullptr;
 		}
 
 		// Load libraries
 		Dart_Handle core_library;        
 		for(Library* library : dartVm->getLibraries())
 		{
-			result = library->Load();
+			result = library->load();
 
 			if (Dart_IsError(result)) {
 				*error = strdup(Dart_GetError(result));
 				Dart_ExitScope();
 				Dart_ShutdownIsolate();
-				return NULL;
+				return nullptr;
 			}
 
 			if(library->getName() == CORE_LIBRARY_NAME)
 				core_library = result;
 		}
-		LOG_I("Loaded built-in libraries")
 
+		ofLogNotice() << "Loading: " << scriptFile;
 
-			LOG_I("About to load " << scriptFile)
-			Dart_Handle library = LoadScript(scriptFile.c_str(), false, core_library);
+		Dart_Handle library = LoadScript(scriptFile.c_str(), false, core_library);
 
 		if (Dart_IsError(library)) {
 			*error = strdup(Dart_GetError(library));
 			Dart_ExitScope();
 			Dart_ShutdownIsolate();
-			return NULL;
+			return nullptr;
 		}
 
 		result = Dart_LibraryImportLibrary(library, core_library, Dart_Null());
@@ -196,16 +199,8 @@ namespace fieldkit { namespace dart {
 			*error = strdup(Dart_GetError(result));
 			Dart_ExitScope();
 			Dart_ShutdownIsolate();
-			return NULL;
+			return nullptr;
 		}
-
-		if (Dart_IsError(result)) {
-			*error = strdup(Dart_GetError(result));
-			Dart_ExitScope();
-			Dart_ShutdownIsolate();
-			return NULL;
-		}
-
 		return new Isolate(isolate, library);
 	}
 
@@ -217,7 +212,7 @@ namespace fieldkit { namespace dart {
 		void* callback_data,
 		char** error)
 	{
-		Isolate* isolate = CreateIsolate(script_uri, main, true, NULL, error);
+		auto isolate = CreateIsolate(script_uri, main, true, NULL, error);
 		if (isolate == NULL) {
 			ofLogError(__FUNCTION__)  << "Failed to create Isolate: " << script_uri << "|" << main
 				<< ": " << error;
@@ -300,7 +295,7 @@ namespace fieldkit { namespace dart {
 
 	// -----------------------------------------------------------------------------
 
-	void DartVM::Init(const bool checkedMode)
+	void DartVM::init(const bool checkedMode)
 	{
 		// setting VM startup options
 		std::vector<std::string> vmFlags;
@@ -323,12 +318,12 @@ namespace fieldkit { namespace dart {
 
 		// initialise libraries
 		for(Library* library : libraries_)
-			library->Init();
+			library->init();
 	}
 
 	// -----------------------------------------------------------------------------
 
-	void DartVM::LoadSnapshot(const std::string file)
+	void DartVM::loadSnapshot(const std::string file)
 	{
 		ofLogNotice(__FUNCTION__) << " : Loading Snapshot " << file;
 
@@ -338,12 +333,13 @@ namespace fieldkit { namespace dart {
 	// -----------------------------------------------------------------------------
 
 #pragma mark ---- LoadScript ----
-	Isolate* DartVM::LoadScript(const std::string scriptFile)
+	Isolate* DartVM::loadScript(const std::string scriptFile)
 	{
 		char* error = NULL;
 		Isolate* isolate = CreateIsolate(scriptFile, "main", true, this, &error);
 		if (!isolate)
 			LOG_E("Failed to create Isolate." << std::endl << error);
+		// make sure we haven't already loaded this Isolate
 		return isolate;
 	}
 

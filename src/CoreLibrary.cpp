@@ -16,7 +16,7 @@
 #include "Library.h"
 #include "utilities.h"
 
-/// tig to make inline code editing easier.
+/// (tig:) to make inline code editing easier.
 #ifndef DART_LANG_SOURCE
 #define DART_LANG_SOURCE(x) #x
 #endif 
@@ -24,12 +24,12 @@
 
 namespace fieldkit { namespace dart {
     
-    void base_exit(Dart_NativeArguments args)
+    void native_exit(Dart_NativeArguments args)
     {
         exit(0);
     }
 
-    void base_print(Dart_NativeArguments arguments)
+    void native_print(Dart_NativeArguments arguments)
     {
         std::stringstream ss;
         for(int i=0; i<Dart_GetNativeArgumentCount(arguments); i++) {
@@ -41,8 +41,7 @@ namespace fieldkit { namespace dart {
         std::cout << ss.str();
     }
 
-        
-    void CoreLibrary::Init()
+    void CoreLibrary::init()
     {
         mName = CORE_LIBRARY_NAME;
         
@@ -52,8 +51,9 @@ namespace fieldkit { namespace dart {
             void print(String message) native "print";
 		);
 
-        add("exit", base_exit);
-        add("print", base_print);
-    }
+        add("exit", native_exit);
+        add("print", native_print);
+    
+	}
 
 } }

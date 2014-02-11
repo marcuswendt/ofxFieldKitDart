@@ -27,9 +27,7 @@ namespace fieldkit { namespace dart {
 
 		/// factory function
 		static shared_ptr<DartVM> create( std::string snapshotFilePath ) {
-			shared_ptr<DartVM> dartVM;
-			dartVM = shared_ptr<DartVM> (new DartVM(snapshotFilePath));
-			return dartVM;
+			return shared_ptr<DartVM> (new DartVM(snapshotFilePath));
 		};
 		/// constructor
 		explicit DartVM( std::string snapshotFilePath_ );
@@ -37,14 +35,17 @@ namespace fieldkit { namespace dart {
 		~DartVM();
 
 		//! prepares the dart virtual machine
-		void Init(const bool checkedMode = true);
+		void init(const bool checkedMode = true);
 
-		void LoadSnapshot(const std::string file);
+		void loadSnapshot(const std::string file);
 
 		//! load, parse and compile a script, returns a script isolate
-		/// TODO: who owns the Isolate?
-		Isolate* LoadScript(const std::string scriptFile);
+		/// the dart owns the isolate. don't destroy manually.
+		Isolate* loadScript(const std::string scriptFile);
 
+		/// brief: adds a library to the current virtual machine
+		/// note: the vm takes ownership of the library, and 
+		/// takes care of deleting these when the VM destructs.
 		void add(Library* library);
 
 		// Accessors
