@@ -9,9 +9,7 @@
 
 #include "CoreLibrary.h"
 
-#include <iostream>
-#include <sstream>
-
+#include "ofMain.h"
 #include "dart_api.h"
 #include "Library.h"
 #include "utilities.h"
@@ -35,10 +33,12 @@ namespace fieldkit { namespace dart {
         for(int i=0; i<Dart_GetNativeArgumentCount(arguments); i++) {
             Dart_Handle value = Dart_GetNativeArgument(arguments, i);
             std::string str = GetString(value);
-            ss << str << "\n";
+            ss << str;
+			// add a line break for multi-argument printouts.
+			if (i > 0) ss << std::endl;
         }
         
-        std::cout << ss.str();
+        ofLogNotice("dart") << ss.str();
     }
 
     void CoreLibrary::init()

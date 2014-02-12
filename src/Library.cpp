@@ -49,7 +49,7 @@ namespace fieldkit { namespace dart {
         Dart_Handle library = Dart_LookupLibrary(url);
         
         if (Dart_IsError(library))
-            library = Dart_LoadLibrary(url, NewString(mSource));
+            library = Dart_LoadLibrary(url, NewString(mSource.data()));
         
         if (Dart_IsError(library)) {
             LOG_E("Failed to load library (name: " << mName << " source: " << mSource << ")\n Error: " << Dart_GetError(library))

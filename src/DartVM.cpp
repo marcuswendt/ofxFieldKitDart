@@ -26,6 +26,8 @@ using namespace std;
 namespace fieldkit { namespace dart {
 
 
+	bool DartVM::isInitialized = false;
+
 	// -----------------------------------------------------------------------------
 
 	DartVM::DartVM( std::string snapshotFilePath_ )
@@ -50,6 +52,7 @@ namespace fieldkit { namespace dart {
 
 	DartVM::~DartVM()
 	{
+
 		Dart_ShutdownIsolate();
 
 		while(!libraries_.empty()) {
@@ -57,9 +60,8 @@ namespace fieldkit { namespace dart {
 			libraries_.pop_back();
 		}
 
-		bool result = Dart_Cleanup();
-		ofLog() << "Dart Cleanup" << (result ? " successful" : " error");
-		
+		//bool result = Dart_Cleanup();
+		//ofLog() << "Dart Cleanup" << (result ? " successful" : " error");
 	}
 
 	// -----------------------------------------------------------------------------
@@ -297,24 +299,26 @@ namespace fieldkit { namespace dart {
 
 	void DartVM::init(const bool checkedMode)
 	{
-		// setting VM startup options
-		std::vector<std::string> vmFlags;
-		if(checkedMode)
-			vmFlags.push_back("--enable-checked-mode");
+		if (!isInitialized){
+			// setting VM startup options
+			std::vector<std::string> vmFlags;
+			if(checkedMode)
+				vmFlags.push_back("--enable-checked-mode");
 
-		const char **vmFlagsC = (const char **)malloc(vmFlags.size() * sizeof( const char * ));
-		for(size_t i = 0; i < vmFlags.size(); i++)
-			vmFlagsC[i] = vmFlags[i].c_str();
+			const char **vmFlagsC = (const char **)malloc(vmFlags.size() * sizeof( const char * ));
+			for(size_t i = 0; i < vmFlags.size(); i++)
+				vmFlagsC[i] = vmFlags[i].c_str();
 
-		bool success = Dart_SetVMFlags(vmFlags.size(), vmFlagsC);
-		assert(success);
-		free(vmFlagsC);
+			bool success = Dart_SetVMFlags(vmFlags.size(), vmFlagsC);
+			free(vmFlagsC);
 
-		success = Dart_Initialize(IsolateCreateCb, InterruptIsolateCb,
-			UnhandledExceptionCb, ShutdownIsolateCb,
-			OpenFileCb, ReadFileCb,
-			WriteFileCb, CloseFileCb, EntropySourceCb);
-		assert(success);
+			success = Dart_Initialize(IsolateCreateCb, InterruptIsolateCb,
+				UnhandledExceptionCb, ShutdownIsolateCb,
+				OpenFileCb, ReadFileCb,
+				WriteFileCb, CloseFileCb, EntropySourceCb);
+			assert(success);
+			isInitialized = true;
+		} 
 
 		// initialise libraries
 		for(Library* library : libraries_)

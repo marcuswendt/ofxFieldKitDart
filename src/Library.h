@@ -12,6 +12,7 @@
 
 #include "dart_api.h"
 #include <map>
+#include <string>
 
 namespace fieldkit { namespace dart {
     
@@ -23,7 +24,7 @@ namespace fieldkit { namespace dart {
     class Library {
     public:
         Library()
-        : mName(nullptr), mSource(nullptr), mInitializer(nullptr) {}
+        : mName(nullptr), mSource(""), mInitializer(nullptr) {}
         
         virtual ~Library() {}
         
@@ -38,7 +39,7 @@ namespace fieldkit { namespace dart {
         
     protected:
         const char* mName;
-        const char* mSource;
+        std::string mSource;
 
         NativeFunctionMap mFunctions;
         Dart_LibraryInitializer mInitializer;

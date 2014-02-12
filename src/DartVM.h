@@ -22,6 +22,7 @@ namespace fieldkit { namespace dart {
 
 		/// disables direct instantiation
 		DartVM(){};
+		static bool isInitialized;
 
 	public:
 
