@@ -26,6 +26,27 @@ using namespace std;
 namespace fieldkit { namespace dart {
 
 
+	// -----------------------------------------------------------------------------
+
+	Dart_Handle ReadSource(Dart_Handle script) {
+		Dart_Handle scriptPath = script;
+
+		string filePath = GetString(scriptPath);
+		
+		if (ofFile::doesFileExist(filePath)){
+			Dart_Handle source = fieldkit::dart::NewString(ofBufferFromFile(filePath,true).getBinaryBuffer());
+			return source;
+		} 
+
+		// ---------| invariant: file not found.
+
+		ofLogError() << "file not found: " << filePath;
+		return Dart_NewStringFromCString("");
+
+
+	}
+
+
 	bool DartVM::isInitialized = false;
 
 	// -----------------------------------------------------------------------------
@@ -67,12 +88,47 @@ namespace fieldkit { namespace dart {
 	// -----------------------------------------------------------------------------
 
 #pragma mark ---- Isolate Creation ----
-	Dart_Handle LibraryTagHandler(Dart_LibraryTag tag,
-		Dart_Handle library,
-		Dart_Handle url)
+	Dart_Handle LibraryTagHandler(Dart_LibraryTag tag, Dart_Handle library, Dart_Handle url)
 	{
-		if(tag == Dart_kCanonicalizeUrl)
+		ofLogNotice() << GetString(url);
+		ofLogNotice() << tag;
+
+		switch (tag) {
+		case Dart_kCanonicalizeUrl:
+			// The URL is already canonicalized.
 			return url;
+			break;
+		case Dart_kImportTag: 
+			{
+				Dart_Handle source = ReadSource(url);
+				if (Dart_IsError(source)) 
+				{
+					return source;
+				}
+				Dart_Handle lib = Dart_LoadLibrary(url, source);
+				if (Dart_IsError(lib)) 
+				{
+					return lib;
+				}
+
+				return lib;
+			}
+			break;
+		case Dart_kSourceTag: 
+			{
+				Dart_Handle source = ReadSource(url);
+				if (Dart_IsError(source)) {
+					return source;
+				}
+				return Dart_LoadSource(library, url, source);
+			}
+			break;
+		default:
+
+			break;
+		}
+
+		return Dart_Null();
 	}
 
 	// -----------------------------------------------------------------------------
@@ -103,13 +159,6 @@ namespace fieldkit { namespace dart {
 		return Dart_Invoke(core_library, NewString("_filePathFromUri"), 2, args);
 	}
 
-	// -----------------------------------------------------------------------------
-
-	Dart_Handle ReadSource(Dart_Handle script, Dart_Handle core_library) {
-		Dart_Handle scriptPath = script;
-		Dart_Handle source = fieldkit::dart::NewString(ofBufferFromFile(GetString(scriptPath),true).getBinaryBuffer());
-		return source;
-	}
 
 	// -----------------------------------------------------------------------------
 
@@ -126,7 +175,7 @@ namespace fieldkit { namespace dart {
 			} else {
 				resolved_script = NewString(script);
 			}
-			Dart_Handle source = ReadSource(resolved_script, core_library);
+			Dart_Handle source = ReadSource(resolved_script);
 			if (Dart_IsError(source))
 				return source;
 
