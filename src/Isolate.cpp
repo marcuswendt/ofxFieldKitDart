@@ -38,7 +38,7 @@ namespace fieldkit { namespace dart {
 		// in the destructor, no?
 
 		// Get type
-		Dart_Handle type = Dart_GetType(library_, NewString(typeName), 0, NULL);
+		Dart_Handle type = Dart_GetType(library_, newString(typeName), 0, NULL);
 		if(Dart_IsError(type)) {
 			LOG_E(Dart_GetError(type));
 		}

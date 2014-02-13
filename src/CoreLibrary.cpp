@@ -32,7 +32,7 @@ namespace fieldkit { namespace dart {
         std::stringstream ss;
         for(int i=0; i<Dart_GetNativeArgumentCount(arguments); i++) {
             Dart_Handle value = Dart_GetNativeArgument(arguments, i);
-            std::string str = GetString(value);
+            std::string str = dart::getString(value);
             ss << str;
 			// add a line break for multi-argument printouts.
 			if (i > 0) ss << std::endl;

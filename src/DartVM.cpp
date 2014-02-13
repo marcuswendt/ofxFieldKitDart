@@ -31,10 +31,10 @@ namespace fieldkit { namespace dart {
 	Dart_Handle ReadSource(Dart_Handle script) {
 		Dart_Handle scriptPath = script;
 
-		string filePath = GetString(scriptPath);
+		string filePath = dart::getString(scriptPath);
 		
 		if (ofFile::doesFileExist(filePath)){
-			Dart_Handle source = fieldkit::dart::NewString(ofBufferFromFile(filePath,true).getBinaryBuffer());
+			Dart_Handle source = dart::newString(ofBufferFromFile(filePath,true).getBinaryBuffer());
 			return source;
 		} 
 
@@ -140,11 +140,11 @@ namespace fieldkit { namespace dart {
 		string rootDir	= filePath.substr( 0, filePath.size() - fileName.size() );
 
 		Dart_Handle args[3] = {
-			NewString( rootDir.c_str() ),
-			NewString( fileName.c_str() ),
+			dart::newString( rootDir.c_str() ),
+			dart::newString( fileName.c_str() ),
 			Dart_True()  // TODO: should this be true or false?
 		};
-		Dart_Handle ret = Dart_Invoke(core_library, NewString("_resolveScriptUri"), 3, args);
+		Dart_Handle ret = Dart_Invoke(core_library, dart::newString("_resolveScriptUri"), 3, args);
 
 		return ret;
 	}
@@ -156,7 +156,7 @@ namespace fieldkit { namespace dart {
 			script,
 			Dart_True()  // TODO: should this be true or false?
 		};
-		return Dart_Invoke(core_library, NewString("_filePathFromUri"), 2, args);
+		return Dart_Invoke(core_library, dart::newString("_filePathFromUri"), 2, args);
 	}
 
 
@@ -173,7 +173,7 @@ namespace fieldkit { namespace dart {
 				if (Dart_IsError(resolved_script))
 					return resolved_script;
 			} else {
-				resolved_script = NewString(script);
+				resolved_script = dart::newString(script);
 			}
 			Dart_Handle source = ReadSource(resolved_script);
 			if (Dart_IsError(source))

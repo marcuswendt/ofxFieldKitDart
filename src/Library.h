@@ -46,6 +46,9 @@ namespace fieldkit { namespace dart {
 
         //! Adds a native function
         void add(const char* name, Dart_NativeFunction function);
+
+		std::string loadSourceFromFile(std::string filePath_);
+
     };
     
 } }
