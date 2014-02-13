@@ -90,9 +90,7 @@ namespace fieldkit { namespace dart {
 #pragma mark ---- Isolate Creation ----
 	Dart_Handle LibraryTagHandler(Dart_LibraryTag tag, Dart_Handle library, Dart_Handle url)
 	{
-		ofLogNotice() << GetString(url);
-		ofLogNotice() << tag;
-
+		// this will resolve any dependencies from within .dart source.
 		switch (tag) {
 		case Dart_kCanonicalizeUrl:
 			// The URL is already canonicalized.
@@ -100,6 +98,8 @@ namespace fieldkit { namespace dart {
 			break;
 		case Dart_kImportTag: 
 			{
+				// this is invoked if our .dart file contains an import tag,
+				// and will attempt to read the specified .dart source file
 				Dart_Handle source = ReadSource(url);
 				if (Dart_IsError(source)) 
 				{

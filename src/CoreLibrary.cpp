@@ -38,7 +38,7 @@ namespace fieldkit { namespace dart {
 			if (i > 0) ss << std::endl;
         }
         
-        ofLogNotice("dart") << ss.str();
+        ofLogNotice("[ dart ] ") << ss.str();
     }
 
     void CoreLibrary::init()
