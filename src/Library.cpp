@@ -37,7 +37,7 @@ namespace fieldkit { namespace dart {
 
 		}
 
-		LOG_W(native_function_name << " is unresolved.");
+		ofLogError() << "unresolved function: " << native_function_name ;
 		return NULL;
 	}
 

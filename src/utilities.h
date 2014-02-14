@@ -77,6 +77,10 @@ namespace fieldkit { namespace dart {
 	/// it to be a dart native function
 #define NATIVE_FUNCTION(FUNCTION) void native_##FUNCTION ( Dart_NativeArguments args )
 
+	/// prepends native_ to your function name and sets the correct function arguments for 
+	/// it to be a dart native function
+#define NATIVE_STATIC_FUNCTION(FUNCTION) static void native_##FUNCTION ( Dart_NativeArguments args )
+
 	// we need to tell dart which sendport to use to reach our native receive port.		
 	// and so we create a sendport from our new native port (which i interpret as a 	
 	// native receive port. Anyhting delivered in dart to this sendport will arrive at our 	 
@@ -102,8 +106,17 @@ namespace fieldkit { namespace dart {
 
 	/// calls .add(dartname, nativename) on the current library, 
 	/// mapping the dart method name to the native method native_name
-#define DART_EXPOSE_NATIVE(FUNCTION) add(#FUNCTION, native_##FUNCTION);
+	/// use this macro in yout library.init() method, after youre done settin up 
+	/// mSource. 
+//#define DART_EXPOSE_NATIVE(FUNCTION) add(#FUNCTION, native_##FUNCTION);          \
+//	mSource += DART_LANG_SOURCE (         										 \
+//	void FUNCTION##() native #FUNCTION ;   							    	     \
+//	); 																			 \
 
+#define DART_EXPOSE_NATIVE(FUNCTION, ...) add(#FUNCTION, native_##FUNCTION);  \
+	mSource += DART_LANG_SOURCE (         										 \
+	void FUNCTION##( __VA_ARGS__ ) native #FUNCTION ;   					    	     \
+	); 																			 \
 
 
 
