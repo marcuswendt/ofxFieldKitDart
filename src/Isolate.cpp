@@ -33,10 +33,6 @@ namespace fieldkit { namespace dart {
 	Dart_Handle Isolate::create(const char* typeName, int argc, Dart_Handle* args)
 	{
 
-		// (tig) we create all this in the global scope, so we don't enter/exit scopes.
-		// TODO: we need to keep track of our instances so that we can clean up properly
-		// in the destructor, no?
-
 		// Get type
 		Dart_Handle type = Dart_GetType(library_, newString(typeName), 0, NULL);
 		if(Dart_IsError(type)) {
