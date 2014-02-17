@@ -32,7 +32,7 @@ namespace fieldkit { namespace dart {
 		Dart_Handle scriptPath = script;
 
 		string filePath = dart::getString(scriptPath);
-		
+
 		if (ofFile::doesFileExist(filePath)){
 			Dart_Handle source = dart::newString(ofBufferFromFile(filePath,true).getBinaryBuffer());
 			return source;
@@ -92,15 +92,71 @@ namespace fieldkit { namespace dart {
 	{
 		// this will resolve any dependencies from within .dart source.
 		switch (tag) {
-		case Dart_kCanonicalizeUrl:
-			// The URL is already canonicalized.
-			return url;
-			break;
+		case Dart_kCanonicalizeUrl: 
+			{
+				// this is where we resolve the include paths, relative to the library including
+				// any other files.
+
+				string filePath = dart::getString(url);
+
+				if (filePath.find("fkdart:") == 0){
+					// we have one of our libraries (which are probably already loaded), 
+					// so we need to chomp off the prefix.
+					filePath = filePath.substr(7,string::npos);
+					Dart_Handle shortUrl = Dart_NewStringFromCString(filePath.c_str());
+					return shortUrl;
+				} 
+
+				if (filePath == "fkdart" || filePath.find("dart:") == 0 ){
+					// no need to resolve core libraries!
+					return url;
+				} else {
+
+					Dart_Handle libraryUrlHandle = Dart_LibraryUrl(library);
+					string libraryPath = dart::getString(libraryUrlHandle);
+					//ofLogNotice() << "library path: " << libraryPath;
+					string base_dir = ofFilePath::getEnclosingDirectory(libraryPath,true);
+
+					string resolvedPath = "";
+
+					unsigned pos = filePath.find("package:");
+
+					if (pos != string::npos) {
+						// "package:" was found, we store what comes after to resolve.
+						string packageName = filePath.substr(pos + 8,string::npos);
+						resolvedPath = base_dir + "/packages/" + packageName;
+
+					} else {
+						resolvedPath = base_dir + "/" + filePath;
+					}
+
+					// careful: this is a potential leak, since we don't know what dart is going to 
+					// do with the other url.
+					Dart_Handle resolvedUrl = Dart_NewStringFromCString(resolvedPath.c_str());
+					return resolvedUrl;
+
+				}
+
+				break;
+			}
 		case Dart_kImportTag: 
 			{
 				// this is invoked if our .dart file contains an import tag,
 				// and will attempt to read the specified .dart source file
+
+				string filePath = dart::getString(url);
+				string absoluteDataPath = ofFilePath::getAbsolutePath("",true);
+
+				unsigned pos = filePath.find(absoluteDataPath);
+				if (pos!=string::npos){
+					string relativePath = filePath.substr(absoluteDataPath.length(),string::npos);
+					ofLogNotice() << "import: " << relativePath;
+				} else {
+					ofLogNotice() << "import: " << filePath;
+				}
+
 				Dart_Handle source = ReadSource(url);
+
 				if (Dart_IsError(source)) 
 				{
 					return source;
@@ -116,6 +172,18 @@ namespace fieldkit { namespace dart {
 			break;
 		case Dart_kSourceTag: 
 			{
+				string filePath = dart::getString(url);
+				string absoluteDataPath = ofFilePath::getAbsolutePath("",true);
+
+				unsigned pos = filePath.find(absoluteDataPath);
+				if (pos!=string::npos){
+					string relativePath = filePath.substr(absoluteDataPath.length(),string::npos);
+					ofLogNotice() << "source import: " << relativePath;
+				} else {
+					ofLogNotice() << "source import: " << filePath;
+				}
+
+
 				Dart_Handle source = ReadSource(url);
 				if (Dart_IsError(source)) {
 					return source;
