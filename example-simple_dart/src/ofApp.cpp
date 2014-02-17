@@ -16,9 +16,9 @@ void ofApp::setup()
 
 	dartVM = fieldkit::dart::DartVM::create("snapshots/dart.1.0.core.snapshot");
 
-	dartVM->Init(true);
+	dartVM->init(true);
 
-	script = shared_ptr<dart::Isolate>(dartVM->LoadScript( "main.dart" ));
+	script = shared_ptr<dart::Isolate>(dartVM->loadScript( "main.dart" ));
 
 	script->invoke("main");
 
