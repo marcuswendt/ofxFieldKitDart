@@ -18,26 +18,23 @@ void ofApp::setup()
 
 	dartVM->init(true);
 
-	script = shared_ptr<dart::Isolate>(dartVM->loadScript( "main.dart" ));
+	script = shared_ptr<dart::Isolate>(dartVM->loadScript( "dart/main.dart" ));
 
 	script->invoke("main");
 
-	sketch = script->create("Sketch",0,NULL);
-
-	script->invoke("get_int");
 
 }
 
 
 void ofApp::update()
 {
-	//dart::Invoke(sketch, "update");
+
 
 }
 
 void ofApp::draw()
 {
-	//dart::Invoke(sketch, "draw");
+
 }
 
 
@@ -48,11 +45,14 @@ void ofApp::keyPressed(int key){
 
 void ofApp::keyReleased(int key){
 	if (key == ' '){
- 		dart::Invoke dart_function(sketch, "getMeaningOfLife");
-		ofLogNotice() << (Dart_IsInteger(dart_function.getResult()) ? "integer" : "something else");
-		int64_t res=0;
-		Dart_IntegerToInt64(dart_function.getResult(), &res);
-		ofLogNotice() << res;
+		dartVM = fieldkit::dart::DartVM::create("snapshots/dart.1.0.core.snapshot");
+
+		dartVM->init(true);
+
+		script = shared_ptr<dart::Isolate>(dartVM->loadScript( "dart/main.dart" ));
+
+		script->invoke("main");
+
 	}
 }
 
