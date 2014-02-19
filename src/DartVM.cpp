@@ -124,7 +124,7 @@ namespace fieldkit { namespace dart {
 					if (pos != string::npos) {
 						// "package:" was found, we store what comes after to resolve.
 						string packageName = filePath.substr(pos + 8,string::npos);
-						resolvedPath = base_dir + "/packages/" + packageName;
+						resolvedPath = "dart/packages/" + packageName;
 
 					} else {
 						resolvedPath = base_dir + "/" + filePath;
