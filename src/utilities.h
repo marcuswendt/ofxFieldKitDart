@@ -114,9 +114,9 @@ namespace fieldkit { namespace dart {
 //	); 																			 \
 
 #define DART_EXPOSE_NATIVE(FUNCTION, ...) add(#FUNCTION, native_##FUNCTION);  \
-	mSource += DART_LANG_SOURCE (         										 \
-	void FUNCTION##( __VA_ARGS__ ) native #FUNCTION ;   					    	     \
-	); 																			 \
+	mSource += DART_LANG_SOURCE (         									  \
+	void FUNCTION##( __VA_ARGS__ ) native #FUNCTION ;   					  \
+	); 																		  \
 
 
 
