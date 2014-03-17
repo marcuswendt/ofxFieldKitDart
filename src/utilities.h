@@ -68,7 +68,11 @@ namespace fieldkit { namespace dart {
 		return std::string(result);
 	}
 
+	// ----------------------------------------------------------------------
 	/// (tig) macros to make inline code editing + dart glue easier.
+	// ----------------------------------------------------------------------
+
+
 #ifndef DART_LANG_SOURCE
 #define DART_LANG_SOURCE(x) #x
 #endif 
@@ -108,16 +112,16 @@ namespace fieldkit { namespace dart {
 	/// mapping the dart method name to the native method native_name
 	/// use this macro in yout library.init() method, after youre done settin up 
 	/// mSource. 
-//#define DART_EXPOSE_NATIVE(FUNCTION) add(#FUNCTION, native_##FUNCTION);          \
-//	mSource += DART_LANG_SOURCE (         										 \
-//	void FUNCTION##() native #FUNCTION ;   							    	     \
-//	); 																			 \
 
 #define DART_EXPOSE_NATIVE(FUNCTION, ...) add(#FUNCTION, native_##FUNCTION);  \
 	mSource += DART_LANG_SOURCE (         									  \
 	void FUNCTION##( __VA_ARGS__ ) native #FUNCTION ;   					  \
 	); 																		  \
 
+#define DART_EXPOSE_NATIVE_INT(FUNCTION, ...) add(#FUNCTION, native_##FUNCTION);  \
+	mSource += DART_LANG_SOURCE (         									      \
+	int FUNCTION##( __VA_ARGS__ ) native #FUNCTION ;   					          \
+	); 																		      \
 
 
 } } // namespace fieldkit::dart
